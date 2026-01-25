@@ -17,6 +17,7 @@
     margin-bottom: 6.4rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     @extend %description-12;
     line-height: 1.4;
 
@@ -63,8 +64,8 @@
       width: 100%;
 
       @include media("<=phone") {
-        max-width: 175px;
-        width: 100%;
+        max-width: unset;
+        width: auto;
         margin-left: auto;
 
         br {

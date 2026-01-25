@@ -1,11 +1,11 @@
 %title-328 {
-  font-size: 32.8rem;
+  font-size: 32rem;
   // letter-spacing: -0.05em;
   font-family: $font-bebas;
   word-break: break-word;
 
   @include media("<=phone") {
-    font-size: 160px;
+    font-size: 140px;
   }
 }
 
