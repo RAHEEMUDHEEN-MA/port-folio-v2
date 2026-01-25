@@ -61,8 +61,9 @@ export default class Home {
   themeActions() {
     // Initialize theme from localStorage
     const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
+    if (!storedTheme || storedTheme === "dark") {
       document.documentElement.setAttribute("data-theme", "dark");
+      if (!storedTheme) localStorage.setItem("theme", "dark");
     }
 
     if (themeToggle) {

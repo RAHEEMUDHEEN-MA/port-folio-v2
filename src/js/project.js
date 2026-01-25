@@ -73,9 +73,11 @@ class ProjectPage {
   themeActions() {
     const themeToggle = document.getElementById("js-theme-toggle");
     // Initialize theme from localStorage
+    // Initialize theme from localStorage
     const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
+    if (!storedTheme || storedTheme === "dark") {
       document.documentElement.setAttribute("data-theme", "dark");
+      if (!storedTheme) localStorage.setItem("theme", "dark");
     }
 
     // Since we don't have the toggle button in the simple nav yet, 
