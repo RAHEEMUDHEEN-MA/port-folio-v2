@@ -1,0 +1,229 @@
+[
+  {
+    "id": 1,
+    "title": "DIATADMIN — FULL-STACK ADMINISTRATIVE PLATFORM",
+    "role": "Full Lifecycle Ownership",
+    "description": "Owned end-to-end design and delivery of a custom administrative system for DIAT, a multi-branch technical institute. Collaborated directly with stakeholders to understand complex workflows, made architectural decisions balancing scalability and maintainability, and delivered modules spanning student admissions, academic management, fee tracking, and inventory. Managed full deployment lifecycle on VPS with Nginx, PM2, automated backups, and domain configuration.",
+    "link": "",
+    "problem_statement": "DIAT required a unified administrative system to manage academic, financial, and operational workflows across multiple branches, replacing fragmented manual processes and disconnected tools.",
+    "architecture_image": "diatadmin-multitenant-architecture.svg",
+    "design_decisions": [
+      "Implemented branch-level multi-tenancy with role-based access control to isolate data while sharing a single deployment",
+      "Designed modular backend services to support independent scaling of academic, finance, and inventory domains",
+      "Used cron-based automated backups to cost-effective object storage to avoid per-tenant infrastructure overhead",
+      "Centralized authentication and permissions to simplify user management across branches",
+      "Deployed on a VPS with Nginx and PM2 for controlled cost, predictable performance, and easier maintenance"
+    ],
+    "impact_metrics": [
+      "Used daily by administrators across 4 branches",
+      "Replaced multiple manual and spreadsheet-driven workflows with a single system",
+      "Reduced operational overhead by avoiding separate deployments per branch"
+    ],
+    "links": [
+      {
+        "label": "View live system",
+        "url": ""
+      },
+      {
+        "label": "View technical breakdown",
+        "url": ""
+      },
+      {
+        "label": "View repository",
+        "url": ""
+      }
+    ],
+    "attachments": [
+      {
+        "url": "https://placehold.co/800x800/1a1a1a/orange?text=Admin+Dashboard",
+        "caption": "Main Administrative Dashboard",
+        "alt": "Screenshot of the main admin dashboard showing key metrics"
+      },
+      {
+        "url": "https://placehold.co/800x800/1a1a1a/orange?text=User+Management",
+        "caption": "Role-Based User Management",
+        "alt": "User management interface with role assignment"
+      },
+      {
+        "url": "https://placehold.co/800x800/1a1a1a/orange?text=Reporting+View",
+        "caption": "Automated Reporting Module",
+        "alt": "Reporting interface showing generated financial reports"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "LOGISTICS CRM PLATFORM — ENTERPRISE PRODUCT",
+    "role": "Enterprise Scale Delivery",
+    "description": "Delivered core product features for a logistics CRM at Frugal Scientific, owning modules from database design through UI implementation. Built consignment tracking, geo-based logistics management, contract handling, and real-time analytics dashboards. Collaborated with product and operations teams to balance technical feasibility with business requirements, making trade-offs between feature complexity and delivery timelines.",
+    "link": "",
+    "problem_statement": "The logistics team required a centralized CRM to track consignments, manage contracts, and gain real-time operational visibility across multiple workflows and stakeholders.",
+    "architecture_image": "logistics-crm-system-overview.svg",
+    "design_decisions": [
+      "Designed database schemas optimized for high-volume consignment and contract data",
+      "Integrated geo-location data to enable real-time shipment visibility",
+      "Built analytics dashboards that aggregate operational data without impacting transactional performance",
+      "Collaborated closely with operations teams to simplify workflows while preserving business rules",
+      "Balanced real-time data needs with backend performance constraints"
+    ],
+    "impact_metrics": [
+      "Improved visibility into logistics operations for internal teams",
+      "Enabled faster issue identification through real-time dashboards",
+      "Reduced manual coordination between operations and reporting teams"
+    ],
+    "links": [
+      {
+        "label": "View live system",
+        "url": ""
+      },
+      {
+        "label": "View technical breakdown",
+        "url": ""
+      },
+      {
+        "label": "View repository",
+        "url": ""
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "CONFIG-DRIVEN UI ARCHITECTURE — PLATFORM ENGINEERING",
+    "role": "50% Code Reduction",
+    "description": "Architected and delivered a reusable, config-driven React system at Frugal Scientific that generates complete admin interfaces from configuration. Made critical architectural decisions to reduce frontend codebase from ~100K to ~50K LOC, eliminating duplication across multiple enterprise products. Balanced abstraction complexity with developer experience, accelerating team velocity while maintaining code quality.",
+    "link": "",
+    "problem_statement": "Multiple enterprise products shared similar admin interfaces, resulting in duplicated code, inconsistent behavior, and slower feature delivery.",
+    "architecture_image": "config-driven-ui-architecture.svg",
+    "design_decisions": [
+      "Introduced a schema-driven UI layer to generate forms, tables, and workflows from configuration",
+      "Built a component registry to map config definitions to reusable React components",
+      "Integrated permission-aware rendering to handle role-based access declaratively",
+      "Abstracted common data-fetching and state management patterns",
+      "Carefully limited abstraction depth to preserve developer readability and debugging ease"
+    ],
+    "impact_metrics": [
+      "Reduced frontend codebase size by approximately 50%",
+      "Accelerated development of new admin modules across products",
+      "Improved consistency and maintainability of enterprise UIs"
+    ],
+    "links": [
+      {
+        "label": "View live system",
+        "url": ""
+      },
+      {
+        "label": "View technical breakdown",
+        "url": ""
+      },
+      {
+        "label": "View repository",
+        "url": ""
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "FINTECH REPORTING DASHBOARD — PRODUCT OWNERSHIP",
+    "role": "Complex Data Analytics",
+    "description": "Owned the complete frontend architecture and delivery of a fintech reporting dashboard at Frugal Scientific. Collaborated with HR and business stakeholders to translate complex reporting requirements into technical solutions. Designed and implemented live field-officer tracking, visual analytics, and complex reporting views, making UX and performance trade-offs to meet diverse stakeholder needs.",
+    "link": "",
+    "problem_statement": "Business and HR teams required real-time visibility into field operations and performance metrics, but existing reporting tools lacked flexibility and clarity.",
+    "architecture_image": "fintech-reporting-dashboard-flow.svg",
+    "design_decisions": [
+      "Designed data-heavy dashboards optimized for readability and performance",
+      "Implemented real-time tracking views for field officers",
+      "Used efficient data-fetching strategies to avoid overloading reporting APIs",
+      "Worked closely with non-technical stakeholders to refine reporting requirements",
+      "Balanced visual complexity with usability for different user roles"
+    ],
+    "impact_metrics": [
+      "Improved decision-making through real-time operational insights",
+      "Reduced reliance on ad-hoc reports and manual data extraction",
+      "Enabled stakeholders to self-serve business metrics"
+    ],
+    "links": [
+      {
+        "label": "View live system",
+        "url": ""
+      },
+      {
+        "label": "View technical breakdown",
+        "url": ""
+      },
+      {
+        "label": "View repository",
+        "url": ""
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "SELF-SERVICE CLIENT PORTAL — PRODUCT DEVELOPMENT",
+    "role": "Self-Service Automation",
+    "description": "Built a self-service logistics portal at Frugal Scientific enabling clients to independently manage RFPs, contracts, and operational dashboards. Owned technical decisions around access control, data visibility, and workflow automation. Reduced engineering support overhead by designing intuitive interfaces and robust backend systems, balancing client flexibility with system security.",
+    "link": "",
+    "problem_statement": "Clients depended heavily on internal teams for routine operational actions, creating delays and increasing support load.",
+    "architecture_image": "self-service-portal-architecture.svg",
+    "design_decisions": [
+      "Designed role-based access control to safely expose client-facing functionality",
+      "Implemented workflow automation for RFP and contract management",
+      "Separated client and internal data visibility at both API and UI levels",
+      "Focused on intuitive UX to minimize client onboarding friction",
+      "Ensured backend validations to prevent misuse of self-service capabilities"
+    ],
+    "impact_metrics": [
+      "Reduced support dependency for routine client operations",
+      "Improved turnaround time for client-initiated actions",
+      "Enabled scalable client onboarding without proportional engineering effort"
+    ],
+    "links": [
+      {
+        "label": "View live system",
+        "url": ""
+      },
+      {
+        "label": "View technical breakdown",
+        "url": ""
+      },
+      {
+        "label": "View repository",
+        "url": ""
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "SAAS ODR SESSION PLATFORM — REAL-TIME SYSTEMS",
+    "role": "Real-Time Architecture",
+    "description": "Designed and built a queue-based online arbitration and mediation platform at Frugal Scientific using MERN stack, WebSockets, and video conferencing APIs. Made architectural decisions around real-time state synchronization, session management, and scalability. Coordinated structured virtual sessions for tech-legal domain, balancing system complexity with reliability requirements.",
+    "link": "",
+    "problem_statement": "The tech-legal domain required a structured, real-time platform to conduct arbitration and mediation sessions remotely with controlled access and session flow.",
+    "architecture_image": "odr-realtime-system-flow.svg",
+    "design_decisions": [
+      "Designed a queue-based session flow to manage participant entry and sequencing",
+      "Used WebSockets for real-time state synchronization across participants",
+      "Integrated video conferencing APIs for live dispute resolution sessions",
+      "Handled session lifecycle and failure scenarios to ensure reliability",
+      "Balanced real-time responsiveness with system stability and scalability"
+    ],
+    "impact_metrics": [
+      "Enabled fully remote arbitration and mediation workflows",
+      "Improved reliability of virtual dispute resolution sessions",
+      "Supported structured session control for multiple participants"
+    ],
+    "links": [
+      {
+        "label": "View live system",
+        "url": ""
+      },
+      {
+        "label": "View technical breakdown",
+        "url": ""
+      },
+      {
+        "label": "View repository",
+        "url": ""
+      }
+    ]
+  }
+]

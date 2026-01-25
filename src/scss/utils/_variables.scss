@@ -1,0 +1,28 @@
+:root {
+  --col-black: #fafafa;
+  --col-white: #1a1a1a;
+  --col-boulder: #555555;
+  --col-gray: #333333;
+  --gradient-start: rgba(233, 227, 198, 0.3);
+  --gradient-end: rgba(233, 198, 217, 0.3);
+}
+
+[data-theme="dark"] {
+  --col-black: #111111;
+  --col-white: #ffffff;
+  --col-boulder: #777777;
+  --col-gray: #aaaaaa;
+  --gradient-start: rgba(233, 227, 198, 0.5);
+  --gradient-end: rgba(233, 198, 217, 0.5);
+}
+
+$col-black: var(--col-black);
+$col-white: var(--col-white);
+$col-orange: #cb450c;
+$col-boulder: var(--col-boulder);
+$col-gray: var(--col-gray);
+$font-bebas: "Bebas Neue", sans-serif;
+$font-sauce: "Open Sauce", arial;
+$gradient: linear-gradient(90deg,
+    var(--gradient-start) 0%,
+    var(--gradient-end) 100%);
