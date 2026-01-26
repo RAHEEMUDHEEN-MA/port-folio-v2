@@ -103,12 +103,14 @@ class ProjectPage {
            <p>${project.problem_statement || project.description}</p>
          </div>
 
+         ${project.architecture_image ? `
          <div class="section architecture" data-scroll data-scroll-speed="-2" data-scroll-direction="horizontal">
            <h3>Architecture Overview</h3>
            <div class="architecture-diagram">
-              ${project.architecture_image ? `<img src="${project.architecture_image}" alt="Architecture Diagram for ${project.title}" class="architecture-img" style="max-width: 100%; height: auto;" />` : 'Architecture Diagram'}
+              <img src="${project.architecture_image}" alt="Architecture Diagram for ${project.title}" class="architecture-img" style="max-width: 100%; height: auto;" onerror="this.closest('.section.architecture').style.display='none'" />
            </div>
          </div>
+         ` : ''}
 
          ${technicalHighlights ? `
          <div class="section technical-highlights" data-scroll data-scroll-speed="2" data-scroll-direction="horizontal">
@@ -119,23 +121,29 @@ class ProjectPage {
          </div>
          ` : ''}
 
+         ${designDecisions ? `
          <div class="section decisions" data-scroll data-scroll-speed="2" data-scroll-direction="horizontal">
            <h3>System Flow / Design Decisions</h3>
            <ul class="styled-list">
              ${designDecisions}
            </ul>
          </div>
+         ` : ''}
 
+         ${impactMetrics ? `
          <div class="section impact" data-scroll data-scroll-speed="-2" data-scroll-direction="horizontal">
            <h3>Impact & Outcomes</h3>
            <ul class="styled-list">
              ${impactMetrics}
            </ul>
          </div>
+         ` : ''}
 
+         ${links ? `
          <div class="section pro-links" data-scroll data-scroll-speed="1" data-scroll-direction="horizontal">
            ${links}
          </div>
+         ` : ''}
          
          ${this.renderAttachments(project)}
       </div>

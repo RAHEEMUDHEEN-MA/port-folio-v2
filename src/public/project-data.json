@@ -18,28 +18,6 @@
       "Used daily by administrators across 4 branches",
       "Replaced multiple manual and spreadsheet-driven workflows with a single system",
       "Reduced operational overhead by avoiding separate deployments per branch"
-    ],
-    "attachments": [
-      {
-        "url": "diat/diat-admin-attachment-stundet-fee-breakdown.png",
-        "caption": "Student Fee Payment Breakdown",
-        "alt": "Breakdown of student fee payments including tuition and other charges"
-      },
-      {
-        "url": "diat/diat-admin-attachment-financial-dashboards.png",
-        "caption": "Financial Overview Dashboard",
-        "alt": "Dashboard showing financial metrics and key performance indicators"
-      },
-      {
-        "url": "diat/diat-admin-attachment-financial-report.png",
-        "caption": "Automated Financial Reporting",
-        "alt": "Generated financial report with detailed transaction logs"
-      },
-      {
-        "url": "diat/diat-admin-attachment-inventory-movements.png",
-        "caption": "Inventory Movement Tracking",
-        "alt": "Interface tracking inventory stock movements across branches"
-      }
     ]
   },
   {
@@ -118,6 +96,43 @@
       "Improved decision-making for managers and leadership through hierarchy-based performance reporting",
       "Reduced dependency on manual status tracking and ad-hoc reports",
       "Supported daily monitoring of large field teams in loan recovery operations"
+    ],
+    "attachments": [
+      {
+        "url": "fintech/fintech-main-dashboard.jpeg",
+        "caption": "Main Operational Dashboard",
+        "alt": "Comprehensive dashboard showing high-level operational metrics and KPIs"
+      },
+      {
+        "url": "fintech/fintech-field-dashboard.jpeg",
+        "caption": "Field Operations Dashboard",
+        "alt": "Dashboard focused on field agent activities and daily targets"
+      },
+      {
+        "url": "fintech/fintech-field-user-tracking.jpeg",
+        "caption": "Real-Time Agent Tracking",
+        "alt": "Map view displaying real-time locations of field agents"
+      },
+      {
+        "url": "fintech/fintech-field-user-tracking-2.jpeg",
+        "caption": "Agent Route Analysis",
+        "alt": "Detailed view of agent routes and movement history"
+      },
+      {
+        "url": "fintech/fintech-field-user-nearby-parties.jpeg",
+        "caption": "Geospatial Party Locating",
+        "alt": "Map interface for locating nearby parties or customers for visits"
+      },
+      {
+        "url": "fintech/fintech-field-user-street-view.jpeg",
+        "caption": "Street View Verification",
+        "alt": "Integrated street view for verifying location details"
+      },
+      {
+        "url": "fintech/fintech-field-recursive-table.jpeg",
+        "caption": "Hierarchical Data Reporting",
+        "alt": "Table view showing recursive hierarchy of data for reporting"
+      }
     ]
   },
   {
@@ -166,6 +181,33 @@
       {
         "label": "View design walkthrough",
         "url": ""
+      }
+    ],
+    "attachments": [
+      {
+        "url": "logistics/logistics-sea-dashboard.jpeg",
+        "caption": "Maritime Logistics Dashboard",
+        "alt": "Comprehensive dashboard for tracking sea freight and logistics operations"
+      },
+      {
+        "url": "logistics/logistics-wms.jpeg",
+        "caption": "Warehouse Management System (WMS)",
+        "alt": "Interface for managing warehouse inventory and stock levels"
+      },
+      {
+        "url": "logistics/logistics-multi-consigment-geo-tracking.jpeg",
+        "caption": "Multi-Consignment Geo Tracking",
+        "alt": "Map-based tracking of multiple consignments in real-time"
+      },
+      {
+        "url": "logistics/logistics-map-popover.jpeg",
+        "caption": "Interactive Map Popover",
+        "alt": "Detailed shipment information displayed on map interaction"
+      },
+      {
+        "url": "logistics/logistics-dark-mode.jpeg",
+        "caption": "Dark Mode Interface",
+        "alt": "Sleek dark mode version of the logistics CRM interface"
       }
     ]
   },
