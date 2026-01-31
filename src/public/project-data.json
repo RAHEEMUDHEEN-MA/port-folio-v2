@@ -1,27 +1,6 @@
 [
   {
     "id": 1,
-    "title": "DIATADMIN — FULL-STACK ADMINISTRATIVE PLATFORM",
-    "role": "Full Lifecycle Ownership",
-    "description": "Owned end-to-end design and delivery of a custom administrative system for DIAT, a multi-branch technical institute. Collaborated directly with stakeholders to understand complex workflows, made architectural decisions balancing scalability and maintainability, and delivered modules spanning student admissions, academic management, fee tracking, and inventory. Managed full deployment lifecycle on VPS with Nginx, PM2, automated backups, and domain configuration.",
-    "link": "",
-    "problem_statement": "DIAT required a unified administrative system to manage academic, financial, and operational workflows across multiple branches, replacing fragmented manual processes and disconnected tools.",
-    "architecture_image": "diat/DIATADMIN-FLOW-ARCHITECTURE.svg",
-    "design_decisions": [
-      "Implemented branch-level multi-tenancy with role-based access control to isolate data while sharing a single deployment",
-      "Designed modular backend services to support independent scaling of academic, finance, and inventory domains",
-      "Used cron-based automated backups to cost-effective object storage to avoid per-tenant infrastructure overhead",
-      "Centralized authentication and permissions to simplify user management across branches",
-      "Deployed on a VPS with Nginx and PM2 for controlled cost, predictable performance, and easier maintenance"
-    ],
-    "impact_metrics": [
-      "Used daily by administrators across 4 branches",
-      "Replaced multiple manual and spreadsheet-driven workflows with a single system",
-      "Reduced operational overhead by avoiding separate deployments per branch"
-    ]
-  },
-  {
-    "id": 2,
     "title": "CONFIG-DRIVEN FRONTEND FRAMEWORK — INTERNAL UI PLATFORM",
     "role": "Framework Architect & Ownership",
     "description": "Architected and owned an internal config-driven frontend framework at Frugal Scientific, built on React (Vite), Material UI, Redux Toolkit, and Redux-Saga. The framework enables teams to generate complete enterprise admin interfaces—tables, forms, filters, drawers, permissions, and CRUD workflows—entirely from declarative configuration. Designed for high reuse, controlled extensibility, and long-term maintainability, the system is now the company-wide standard powering multiple production products.",
@@ -54,9 +33,9 @@
     ]
   },
   {
-    "id": 3,
+    "id": 2,
     "title": "SAAS ODR SESSION PLATFORM — REAL-TIME EVENT SYSTEMS",
-    "role": "Real-Time Architecture & Event Orchestration",
+    "role": "Real-Time Systems & Event Orchestration",
     "description": "Designed and built a SaaS ODR session and event management platform at Frugal Scientific to support scheduled online arbitration and mediation workflows. Enabled arbitrators to create events, invite participants via email and SMS, and conduct structured virtual proceedings through a public FIFO-based lobby with turn-controlled access and chat. Implemented mobile OTP-based authentication with unique invite tokens for frictionless public access, real-time state synchronization using WebSockets, and resilient rejoin handling that places disconnected participants back into the lobby queue. Automated session notifications, reminders, and lifecycle management using cron-based background jobs, balancing real-time responsiveness with system reliability.",
     "link": "",
     "problem_statement": "Arbitrators and mediators were manually coordinating scheduled online arbitration and mediation sessions using external video links and ad-hoc communication, resulting in poor access control, lack of structured turn management, and high operational overhead.",
@@ -74,6 +53,29 @@
       "Enabled multiple concurrent ODR events with controlled access and session flow",
       "Eliminated manual coordination of virtual dispute resolution sessions",
       "Improved reliability and structure of remote arbitration and mediation workflows"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "DIATADMIN — CLIENT-FACING ADMINISTRATIVE SYSTEM",
+    "role": "End-to-End Delivery & Requirement Analysis",
+    "description": "Delivered a custom administrative system for DIAT, a multi-branch technical institute, by working directly with non-technical stakeholders to translate academic, financial, and operational workflows into a maintainable full-stack solution. Focused on clarity, reliability, and cost-aware engineering rather than infrastructure scale, while owning the system from requirements through production.",
+    "link": "",
+    "problem_statement": "DIAT relied on spreadsheets and disconnected tools to manage admissions, academics, finances, and inventory across branches, leading to inconsistent data, duplicated effort, and limited operational visibility.",
+    "architecture_image": "diat/DIATADMIN-FLOW-ARCHITECTURE.svg",
+    "design_decisions": [
+      "Identified branch isolation as a core business requirement and implemented branch-scoped data access and permissions within a single shared deployment",
+      "Translated informal administrative workflows into explicit system rules for admissions, attendance, fee handling, expenses, and inventory movement",
+      "Structured backend modules around real organizational domains (Academic, Finance, Inventory) to align the system with departmental responsibilities",
+      "Centralized authentication and role-based access control to simplify user management across branches",
+      "Recognized financial data loss as a critical operational risk and implemented a lightweight, zero-cost automated backup flow using existing cloud storage",
+      "Chose a simple VPS-based deployment model to minimize operational overhead and ensure the system could be maintained without dedicated infrastructure staff"
+    ],
+    "impact_metrics": [
+      "Used daily by administrators across 4 active branches",
+      "Replaced fragmented manual and spreadsheet-driven workflows with a unified system",
+      "Improved reliability and auditability of academic and financial operations",
+      "Delivered a maintainable solution aligned with tight budget and operational constraints"
     ]
   },
   {
