@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { copyText } from "./utils/index";
 import { mapEach } from "./utils/dom";
+import { initGA, trackEvent } from "./utils/analytics";
 const toContactButtons = document.querySelectorAll(".contact-scroll");
 const footer = document.getElementById("js-footer");
 const scrollEl = document.querySelector("[data-scroll-container]");
@@ -55,6 +56,10 @@ export default class Home {
     this.themeActions();
     this.initConsole();
     this.updateLinks();
+
+    // Initialize Analytics
+    initGA(import.meta.env.VITE_GA_MEASUREMENT_ID);
+    this.initAnalyticsEvents();
   }
 
 
@@ -304,6 +309,51 @@ export default class Home {
         resumeLink.href = CONSTANTS.RESUME_URL;
       }
     }).catch(err => console.error('Failed to load constants', err));
+  }
+
+  initAnalyticsEvents() {
+    // 1. Resume Download
+    const resumeLink = document.getElementById('js-resume-link');
+    if (resumeLink) {
+      resumeLink.addEventListener('click', () => {
+        trackEvent('resume_download');
+      });
+    }
+
+    // 2. Social Media Clicks (GitHub & LinkedIn)
+    const linkedinLinks = document.querySelectorAll('a[href*="linkedin.com"]');
+    linkedinLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        trackEvent('linkedin_click');
+      });
+    });
+
+    const githubLinks = document.querySelectorAll('a[href*="github.com"]');
+    githubLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        trackEvent('github_click');
+      });
+    });
+
+    // 3. Engaged Session (> 60 seconds)
+    setTimeout(() => {
+      trackEvent('engaged_session');
+    }, 60000);
+
+    // 4. Scroll Depth (> 70%)
+    let scrollTracked = false;
+    this.locomotive.on("scroll", (args) => {
+      if (scrollTracked) return;
+
+      const { scroll, limit } = args;
+      if (limit.y > 0) {
+        const percentage = scroll.y / limit.y;
+        if (percentage > 0.7) {
+          trackEvent('scroll_depth', { depth: '70%' });
+          scrollTracked = true;
+        }
+      }
+    });
   }
 
   heroTextAnimation() {
