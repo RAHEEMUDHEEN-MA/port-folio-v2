@@ -42,10 +42,8 @@
     &__right {
       text-transform: uppercase;
       justify-content: space-between;
-
-      @include media(">phone") {
-        display: flex;
-      }
+      display: flex;
+      align-items: center;
     }
 
     &__left {

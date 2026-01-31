@@ -53,7 +53,8 @@ export default class Home {
     this.homeAnimations();
     this.homeActions();
     this.themeActions();
-
+    this.initConsole();
+    this.updateLinks();
   }
 
 
@@ -207,6 +208,102 @@ export default class Home {
         },
       });
     }
+  }
+
+  async initConsole() {
+    let consoleLoaded = false;
+    let consoleInstance = null;
+
+    // Show toast notification on first load
+    this.showConsoleToast();
+
+    const toggleConsole = async (isChecked) => {
+      if (!consoleLoaded) {
+        try {
+          const { getConsoleInstance } = await import('./console/ConsoleMode.js');
+          const response = await fetch('/project-data.json');
+          const projectData = await response.json();
+          consoleInstance = await getConsoleInstance(projectData);
+          consoleLoaded = true;
+        } catch (error) {
+          console.error('Failed to load console:', error);
+          return;
+        }
+      }
+
+      if (isChecked) {
+        consoleInstance.show();
+      } else {
+        consoleInstance.hide();
+      }
+    };
+
+    // Setup keyboard shortcut
+    document.addEventListener('keydown', async (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === '`') {
+        e.preventDefault();
+        const checkbox = document.getElementById('js-console-toggle');
+        if (checkbox) {
+          checkbox.checked = !checkbox.checked;
+          await toggleConsole(checkbox.checked);
+        }
+      }
+    });
+
+    // Setup toggle switch
+    const toggleSwitch = document.getElementById('js-console-toggle');
+    if (toggleSwitch) {
+      toggleSwitch.addEventListener('change', async (e) => {
+        await toggleConsole(e.target.checked);
+      });
+    }
+  }
+
+  showConsoleToast() {
+    // Check if toast was already shown in this session
+    const toastShown = sessionStorage.getItem('consoleToastShown');
+    if (toastShown) return;
+
+    // Create toast element
+    const toast = document.createElement('div');
+    toast.className = 'console-toast';
+    toast.innerHTML = `
+      <div class="toast-content">
+        <div class="toast-title">Console Mode Available</div>
+        <div class="toast-message">
+          Press <span class="toast-shortcut">Ctrl+\`</span> or use the toggle switch to access the command-line interface
+        </div>
+      </div>
+    `;
+    document.body.appendChild(toast);
+
+    // Show toast after a short delay
+    setTimeout(() => {
+      toast.classList.add('show');
+    }, 1000);
+
+    // Hide toast after 6 seconds
+    setTimeout(() => {
+      toast.classList.remove('show');
+      toast.classList.add('hide');
+
+      // Remove from DOM after animation
+      setTimeout(() => {
+        toast.remove();
+      }, 400);
+    }, 7500);
+
+    // Mark as shown in session
+    sessionStorage.setItem('consoleToastShown', 'true');
+  }
+
+  updateLinks() {
+    import('./config/constants.js').then(({ CONSTANTS }) => {
+      const resumeLink = document.getElementById('js-resume-link');
+      if (resumeLink) {
+        resumeLink.href = CONSTANTS.RESUME_URL;
+      }
+    }).catch(err => console.error('Failed to load constants', err));
   }
 
   heroTextAnimation() {

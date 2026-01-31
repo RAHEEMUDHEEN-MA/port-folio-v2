@@ -9,6 +9,7 @@ class ProjectPage {
     this.initScroll();
     this.loadProject();
     this.themeActions();
+    this.initConsole();
   }
 
   initScroll() {
@@ -83,6 +84,66 @@ class ProjectPage {
     // Since we don't have the toggle button in the simple nav yet, 
     // we just ensure the theme is applied. 
     // If you add a toggle in project.html, use the same logic as index.js
+  }
+
+  async initConsole() {
+    let consoleLoaded = false;
+    let consoleInstance = null;
+    let projectData = null;
+
+    const toggleConsole = async (isChecked) => {
+      if (!consoleLoaded) {
+        try {
+          const { getConsoleInstance } = await import('./console/ConsoleMode.js');
+          if (!projectData) {
+            const response = await fetch('/project-data.json');
+            projectData = await response.json();
+          }
+          consoleInstance = await getConsoleInstance(projectData);
+          consoleLoaded = true;
+        } catch (error) {
+          console.error('Failed to load console:', error);
+          return;
+        }
+      }
+
+      if (isChecked) {
+        // Sync CWD with current project if needed
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get('id');
+
+        if (projectId && consoleInstance.vfs) {
+          const projectPath = consoleInstance.vfs.getProjectPathById(projectId);
+          if (projectPath) {
+            consoleInstance.setCwd(projectPath);
+          }
+        }
+
+        consoleInstance.show();
+      } else {
+        consoleInstance.hide();
+      }
+    };
+
+    // Setup keyboard shortcut
+    document.addEventListener('keydown', async (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === '`') {
+        e.preventDefault();
+        const checkbox = document.getElementById('js-console-toggle');
+        if (checkbox) {
+          checkbox.checked = !checkbox.checked;
+          await toggleConsole(checkbox.checked);
+        }
+      }
+    });
+
+    // Setup toggle switch
+    const toggleSwitch = document.getElementById('js-console-toggle');
+    if (toggleSwitch) {
+      toggleSwitch.addEventListener('change', async (e) => {
+        await toggleConsole(e.target.checked);
+      });
+    }
   }
 
   renderProject(project, container) {
