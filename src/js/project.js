@@ -161,11 +161,18 @@ class ProjectPage {
       <div class="project-body" data-scroll-section>
          <div class="section context" data-scroll data-scroll-speed="2" data-scroll-direction="horizontal">
            <h3>Context</h3>
-           <p>${project.problem_statement || project.description}</p>
+           <p>${project.description}</p>
          </div>
 
+         ${project.problem_statement ? `
+         <div class="section problem" data-scroll data-scroll-speed="-2" data-scroll-direction="horizontal">
+           <h3>Problem Statement</h3>
+           <p>${project.problem_statement}</p>
+         </div>
+         ` : ''}
+
          ${project.architecture_image ? `
-         <div class="section architecture" data-scroll data-scroll-speed="-2" data-scroll-direction="horizontal">
+         <div class="section architecture" data-scroll data-scroll-speed="2" data-scroll-direction="horizontal">
            <h3>Architecture Overview</h3>
            <div class="architecture-diagram">
               <img src="${project.architecture_image}" alt="Architecture Diagram for ${project.title}" class="architecture-img" style="max-width: 100%; height: auto;" onerror="this.closest('.section.architecture').style.display='none'" />
@@ -174,7 +181,7 @@ class ProjectPage {
          ` : ''}
 
          ${technicalHighlights ? `
-         <div class="section technical-highlights" data-scroll data-scroll-speed="2" data-scroll-direction="horizontal">
+         <div class="section technical-highlights" data-scroll data-scroll-speed="-2" data-scroll-direction="horizontal">
            <h3>Technical Highlights</h3>
            <ul class="styled-list">
              ${technicalHighlights}

@@ -1,23 +1,23 @@
 {
     "about": {
         "title": "About",
-        "description": "<span class=\"first-word\">About</span> &nbsp; I am a product-focused full stack engineer based in Bangalore, India, experienced in designing and delivering scalable MERN applications for real-world business systems. I've built reusable, config-driven React architectures that significantly reduced frontend code across multiple projects. Comfortable owning features end-to-end, collaborating with product and design teams at <span>Frugal Scientific,</span> and shipping production-ready systems used by active users."
+        "description": "<span class=\"first-word\">About</span> &nbsp; I am a product-focused full stack engineer based in Bangalore, India, experienced in designing and delivering scalable MERN applications for real-world business systems. I’ve built reusable, config-driven React systems that significantly reduced frontend code across multiple projects. Comfortable owning features end-to-end, collaborating with product and design teams at <span>Frugal Scientific,</span> and shipping production-ready systems used by active users. I regularly design APIs, manage data models, handle real-time communication, and deploy systems end-to-end—not just the UI layer."
     },
     "technical_approach": {
         "title": "TECHNICAL APPROACH",
-        "description": "I specialize in building <span>config-driven, reusable architectures</span> that reduce code duplication and accelerate delivery. My work focuses on creating scalable systems that balance <span>technical excellence</span> with <span>business impact</span>, from real-time logistics platforms to fintech dashboards and custom administrative systems."
+        "description": "I specialize in building <span>config-driven, reusable systems</span> that reduce code duplication and accelerate delivery. My work focuses on creating scalable platforms that balance <span>technical excellence</span> with <span>business impact</span>, from real-time logistics platforms to fintech dashboards and custom administrative systems."
     },
     "technical_stack": {
         "title": "TECHNICAL STACK",
         "items": [
             "JavaScript (ES6+)",
-            "React.js ⏤ Architecture & Config-driven UI",
             "Node.js ⏤ Express.js",
             "MongoDB ⏤ Database Design",
-            "Redux ⏤ State Management",
-            "MUI, Tailwind CSS ⏤ Responsive UI",
             "API Design & Integration",
             "WebSockets ⏤ Real-time Systems",
+            "React.js ⏤ Config-driven UI & System Design",
+            "Redux ⏤ State Management",
+            "MUI, Tailwind CSS ⏤ Responsive UI",
             "Git, GitHub ⏤ CI/CD Basics",
             "Nginx, PM2 ⏤ VPS Deployment",
             "Cron Jobs ⏤ Automation",
@@ -37,6 +37,6 @@
     },
     "professional_focus": {
         "title": "PROFESSIONAL FOCUS",
-        "description": "I'm passionate about building scalable, maintainable systems that solve real business problems. My focus areas include system architecture, product development, and creating reusable frontend architectures that accelerate team velocity. <button class=\"contact-scroll\">GET IN TOUCH</button> to discuss opportunities."
+        "description": "I'm passionate about building scalable, maintainable systems that solve real business problems. My focus areas include designing clear system boundaries, building product features end-to-end, and creating reusable frontend platforms that accelerate team velocity while remaining backend-aware. <button class=\"contact-scroll\">GET IN TOUCH</button> to discuss opportunities."
     }
 }

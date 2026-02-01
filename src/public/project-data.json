@@ -1,9 +1,9 @@
 [
   {
     "id": 1,
-    "title": "CONFIG-DRIVEN FRONTEND FRAMEWORK — INTERNAL UI PLATFORM",
-    "role": "Frontend Platform Engineering & System Ownership",
-    "description": "Architected and owned an internal config-driven frontend framework at Frugal Scientific, built on React (Vite), Material UI, Redux Toolkit, and Redux-Saga. The framework enables teams to generate complete enterprise admin interfaces—tables, forms, filters, drawers, permissions, and CRUD workflows—entirely from declarative configuration. Designed for high reuse, controlled extensibility, and long-term maintainability, the system is now the company-wide standard powering multiple production products.",
+    "title": "CONFIG-DRIVEN FRONTEND FRAMEWORK",
+    "role": "Platform Engineering & System Ownership (UI Infrastructure)",
+    "description": "Designed, built, and owned an internal config-driven UI platform at Frugal Scientific, built on React (Vite), Material UI, Redux Toolkit, and Redux-Saga. The system enables teams to generate complete enterprise admin interfaces—tables, forms, filters, drawers, permissions, and CRUD workflows—entirely from declarative configuration. Built for high reuse, controlled extensibility, and long-term maintainability, it is now the company-wide standard powering multiple production products.",
     "link": "",
     "problem_statement": "Across logistics and master-data products, admin interfaces followed nearly identical patterns but were implemented repeatedly with custom React components and Redux logic. This resulted in large-scale code duplication, inconsistent UX behavior, slow feature delivery, and high maintenance cost when requirements changed.",
     "architecture_image": "config-framework/CONFIG-DRIVEN-UI-FRAME-WORK-FLOW-ARCHITECTURE.svg",
@@ -16,10 +16,10 @@
       "Introduced controlled escape hatches via a Form Registry, allowing injection of custom React forms when configuration alone is insufficient"
     ],
     "impact_metrics": [
-      "Adopted as the standard frontend admin framework across 5+ production projects",
+      "Adopted as the standard admin UI platform across 5+ production projects",
       "Used daily by co-developers across multiple teams",
       "Powers 100+ admin screens generated primarily from configuration",
-      "Reduced time to build a new menu ui section from 2–3 days to 1–2 hours",
+      "Reduced time to build a new admin menu section from 2–3 days to 1–2 hours",
       "Reduced frontend codebase size by ~50% by eliminating duplicated admin logic",
       "Eliminated the equivalent of hundreds of thousands of lines of redundant UI code across products"
     ],
@@ -27,7 +27,7 @@
       "Built with React + Vite for fast builds and modern development workflow",
       "Material UI used as the base design system with framework-level consistency",
       "Redux-Saga used for complex async flows including dynamic filter query construction",
-      "Supports role-based permissions, base filters, default sorting, and API module routing via config",
+      "Supports role-based permissions, base filters, default sorting, and API module routing via configuration",
       "Configuration supports nested object mapping, constant value injection, computed fields, and custom cell renderers",
       "Custom React form components can be injected per module when advanced validation or workflows are required"
     ],
@@ -41,7 +41,7 @@
   },
   {
     "id": 2,
-    "title": "SAAS ODR SESSION PLATFORM — REAL-TIME EVENT SYSTEMS",
+    "title": "ODR SESSION PLATFORM — REAL-TIME EVENT SYSTEMS",
     "role": "Real-Time Systems & Event Orchestration",
     "description": "Designed and built a SaaS ODR session and event management platform at Frugal Scientific to support scheduled online arbitration and mediation workflows. Enabled arbitrators to create events, invite participants via email and SMS, and conduct structured virtual proceedings through a public FIFO-based lobby with turn-controlled access and chat. Implemented mobile OTP-based authentication with unique invite tokens for frictionless public access, real-time state synchronization using WebSockets, and resilient rejoin handling that places disconnected participants back into the lobby queue. Automated session notifications, reminders, and lifecycle management using cron-based background jobs, balancing real-time responsiveness with system reliability.",
     "link": "",
@@ -66,7 +66,7 @@
     "id": 3,
     "title": "DIATADMIN — CLIENT-FACING ADMINISTRATIVE SYSTEM",
     "role": "End-to-End Delivery & Requirement Analysis",
-    "description": "Delivered a custom administrative system for DIAT, a multi-branch technical institute, by working directly with non-technical stakeholders to translate academic, financial, and operational workflows into a maintainable full-stack solution. Focused on clarity, reliability, and cost-aware engineering rather than infrastructure scale, while owning the system from requirements through production.",
+    "description": "Delivered a custom administrative system for DIAT, a multi-branch technical institute, by working directly with non-technical stakeholders to translate academic, financial, and operational workflows into a maintainable full-stack solution. Owned backend APIs, data modeling, authentication, and VPS deployment alongside the frontend, focusing on clarity, reliability, and cost-aware engineering rather than infrastructure scale while delivering the system from requirements through production. Implemented a QR-based student identity feature that allows secure public access to student profiles, academic records, and fee payment statements via scanned IDs.",
     "link": "",
     "problem_statement": "DIAT relied on spreadsheets and disconnected tools to manage admissions, academics, finances, and inventory across branches, leading to inconsistent data, duplicated effort, and limited operational visibility.",
     "architecture_image": "diat/DIATADMIN-FLOW-ARCHITECTURE.svg",
@@ -75,12 +75,14 @@
       "Translated informal administrative workflows into explicit system rules for admissions, attendance, fee handling, expenses, and inventory movement",
       "Structured backend modules around real organizational domains (Academic, Finance, Inventory) to align the system with departmental responsibilities",
       "Centralized authentication and role-based access control to simplify user management across branches",
+      "Designed a QR-based student identity mechanism to enable controlled public access to student academic and financial information without requiring full authentication",
       "Recognized financial data loss as a critical operational risk and implemented a lightweight, zero-cost automated backup flow using existing cloud storage",
       "Chose a simple VPS-based deployment model to minimize operational overhead and ensure the system could be maintained without dedicated infrastructure staff"
     ],
     "impact_metrics": [
       "Used daily by administrators across 4 active branches",
       "Replaced fragmented manual and spreadsheet-driven workflows with a unified system",
+      "Enabled QR-based student identity verification for quick access to academic and fee information",
       "Improved reliability and auditability of academic and financial operations",
       "Delivered a maintainable solution aligned with tight budget and operational constraints"
     ]
@@ -88,72 +90,35 @@
   {
     "id": 4,
     "title": "FINTECH FIELD OPERATIONS & REPORTING DASHBOARD — PRODUCT OWNERSHIP",
-    "role": "Frontend Architecture & Product Ownership",
-    "description": "Owned and developed the complete frontend architecture and UI/UX of a fintech field-operations and reporting platform for a loan recovery company. Built role-hierarchy–based dashboards used by regional heads, state heads, managers, and operations teams to track collections, visits, attendance, and performance. Implemented real-time field activity monitoring for collection agents, combining live location tracking, visit timelines, and map-based operational visibility. Integrated multiple external services including Frappe APIs, Google Maps, and OpenStreetMap to support real-time data visualization and geospatial workflows.",
+    "role": "Frontend Product Engineering — Analytics & Geo Systems",
+    "description": "Owned and delivered the complete frontend system of a fintech field-operations and reporting platform for a loan recovery company, working closely with a senior backend engineer. Took responsibility for frontend system design, data flow modeling, and UI/UX decisions based on backend API contracts. Implemented field-agent tracking using API polling, where mobile devices periodically send geo-location updates to the server and the frontend reconstructs time-ordered movement paths and visit timelines from coordinate arrays. Built hierarchy-based dashboards used by regional heads, state heads, managers, and operations teams to monitor collections, attendance, visits, and performance. Integrated Frappe APIs, Google Maps, and OpenStreetMap to support geospatial visualization and operational reporting.",
     "link": "",
-    "problem_statement": "Loan recovery operations lacked centralized visibility into real-time field-agent activity and hierarchical performance metrics. Existing systems were fragmented, relied heavily on manual reporting, and did not provide timely operational insights for decision-makers.",
+    "problem_statement": "Loan recovery operations lacked centralized visibility into field-agent activity and hierarchical performance metrics. Existing systems were fragmented, relied heavily on manual reporting, and did not provide timely operational insights for decision-makers.",
     "design_decisions": [
+      "Owned frontend system architecture and UI/UX decisions while integrating with backend APIs developed by a senior backend engineer",
+      "Implemented polling-based geo-location visualization to ensure reliable tracking across varying mobile network conditions",
+      "Reconstructed agent movement paths and visit timelines from ordered geo-coordinate arrays on the frontend",
       "Designed hierarchy-driven reporting views aggregating data across regional head, state head, manager, and field-officer levels",
-      "Built real-time field activity monitoring dashboards with live status, visit timelines, and location tracking",
-      "Integrated external services including Frappe APIs, Google Maps, and OpenStreetMap for geospatial data and operational workflows",
-      "Implemented map-based visualizations to correlate agent movement, visits, and collections",
-      "Optimized frontend data handling for large datasets with filters, exports, and role-specific views",
-      "Balanced near-real-time updates with performance considerations to avoid excessive API load"
+      "Integrated Google Maps and OpenStreetMap for route visualization, nearby-party discovery, and operational context",
+      "Built frontend workflows for CRUD operations, task assignments, and activity logs to support daily field operations"
     ],
     "impact_metrics": [
-      "Enabled real-time visibility into field-agent activity and operational status across regions",
-      "Improved decision-making for managers and leadership through hierarchy-based performance reporting",
+      "Enabled centralized visibility into real-time and historical field-agent movement through frontend-driven visualization",
+      "Improved decision-making for managers through hierarchy-based reporting dashboards",
       "Reduced dependency on manual status tracking and ad-hoc reports",
-      "Supported daily monitoring of large field teams in loan recovery operations"
-    ],
-    "attachments": [
-      {
-        "url": "fintech/fintech-main-dashboard.jpeg",
-        "caption": "Main Operational Dashboard",
-        "alt": "Comprehensive dashboard showing high-level operational metrics and KPIs"
-      },
-      {
-        "url": "fintech/fintech-field-dashboard.jpeg",
-        "caption": "Field Operations Dashboard",
-        "alt": "Dashboard focused on field agent activities and daily targets"
-      },
-      {
-        "url": "fintech/fintech-field-user-tracking.jpeg",
-        "caption": "Real-Time Agent Tracking",
-        "alt": "Map view displaying real-time locations of field agents"
-      },
-      {
-        "url": "fintech/fintech-field-user-tracking-2.jpeg",
-        "caption": "Agent Route Analysis",
-        "alt": "Detailed view of agent routes and movement history"
-      },
-      {
-        "url": "fintech/fintech-field-user-nearby-parties.jpeg",
-        "caption": "Geospatial Party Locating",
-        "alt": "Map interface for locating nearby parties or customers for visits"
-      },
-      {
-        "url": "fintech/fintech-field-user-street-view.jpeg",
-        "caption": "Street View Verification",
-        "alt": "Integrated street view for verifying location details"
-      },
-      {
-        "url": "fintech/fintech-field-recursive-table.jpeg",
-        "caption": "Hierarchical Data Reporting",
-        "alt": "Table view showing recursive hierarchy of data for reporting"
-      }
+      "Supported daily monitoring and coordination of large field teams in loan recovery operations"
     ]
   },
   {
     "id": 5,
     "title": "PRODUCTION ADMIN PLATFORM REFACTOR — FRONTEND SCALABILITY",
-    "role": "Frontend Architecture & Refactoring Ownership",
-    "description": "Refactored a large production admin platform at Frugal Scientific, reducing the frontend codebase from approximately 100K to 50K lines of code. Improved maintainability, readability, and long-term scalability by eliminating duplicated logic, restructuring component boundaries, and standardizing state and data-handling patterns across the application.",
+    "role": "Frontend Platform Refactoring & Scalability Ownership",
+    "description": "Led the refactoring of a large production admin platform at Frugal Scientific, reducing the frontend codebase from approximately 100K to 50K lines of code. Took ownership of restructuring component boundaries, eliminating duplicated logic, and standardizing state and data-handling patterns to improve maintainability, readability, and long-term scalability without feature loss.",
     "link": "",
     "problem_statement": "The existing admin platform had grown organically with duplicated components, tightly coupled logic, and inconsistent patterns, making feature development slow, error-prone, and difficult to scale as product requirements evolved.",
     "design_decisions": [
       "Identified and eliminated duplicated UI and state-management logic across multiple admin modules",
-      "Refactored large, tightly coupled components into smaller, reusable and composable units",
+      "Refactored large, tightly coupled components into smaller, reusable, and composable units",
       "Standardized data-fetching, loading states, and error handling across the application",
       "Improved separation of concerns between UI rendering, business logic, and API integration layers",
       "Aligned the refactored structure with long-term scalability and future extensibility goals"
@@ -162,29 +127,29 @@
       "Reduced frontend codebase size by ~50% without feature loss",
       "Improved developer productivity and onboarding by simplifying code structure",
       "Reduced maintenance overhead and risk of regression during feature changes",
-      "Prepared the platform for future feature expansion with a cleaner architectural foundation"
+      "Prepared the platform for future feature expansion with a cleaner and more scalable foundation"
     ]
   },
   {
     "id": 6,
     "title": "LOGISTICS CRM UI/UX RESTRUCTURING — ROLE-BASED DASHBOARDS",
-    "role": "Frontend Architecture & UX Restructuring",
-    "description": "Co-led a complete UI/UX restructuring of a large logistics CRM platform in close collaboration with the UX design team. Transformed the system from a menu-heavy, module-scattered interface into a clean, module-based, role-driven dashboard experience. Designed and implemented role-based user dashboards with clear information hierarchy to improve operational monitoring, financial visibility, and decision-making for operations, finance, and management users. Introduced consistent theming and first-class geo-data representation using maps to better align the interface with real-world logistics workflows.",
+    "role": "Frontend Product Engineering — UX Restructuring",
+    "description": "Co-led a UI/UX restructuring of a large logistics CRM platform in close collaboration with the UX design team. Took ownership of frontend implementation and information-architecture decisions, transforming the system from a menu-heavy, module-scattered interface into a clean, module-based, role-driven dashboard experience. Designed and implemented role-based dashboards with clear information hierarchy to improve operational monitoring, financial visibility, and decision-making for operations, finance, and management users. Introduced consistent theming and first-class geo-data visualization to better align the interface with real-world logistics workflows.",
     "link": "",
     "problem_statement": "The existing logistics CRM interface had evolved organically with numerous side menus and fragmented internal modules, resulting in poor UX, high cognitive load, and limited visibility into operational and financial data. Users struggled to monitor workflows and derive insights efficiently from the system.",
     "design_decisions": [
       "Collaborated closely with the UX design team to redefine information hierarchy and dashboard layouts",
+      "Translated UX concepts into scalable, reusable frontend components and layouts",
       "Replaced menu-heavy navigation with module-based, role-specific dashboards",
       "Designed role-based views to surface operational, financial, and performance metrics relevant to each user persona",
       "Introduced consistent theming and layout standards to improve visual coherence across modules",
-      "Integrated geo-data and map-based visualizations as first-class UI elements for logistics monitoring",
-      "Simplified navigation flows to reduce cognitive load for daily operational users"
+      "Integrated geo-data and map-based visualizations as first-class UI elements for logistics monitoring"
     ],
     "impact_metrics": [
       "Significantly improved usability and clarity for operations and finance teams",
       "Enabled faster monitoring of logistics operations through dashboard-driven workflows",
       "Reduced user confusion caused by fragmented legacy navigation structures",
-      "Established a scalable UI foundation aligned with long-term CRM evolution"
+      "Established a scalable and maintainable frontend UI foundation for ongoing CRM evolution"
     ],
     "links": [
       {
@@ -223,21 +188,22 @@
   {
     "id": 7,
     "title": "LOGISTICS PLATFORM CONTRIBUTIONS — CRM & SELF-SERVICE PORTALS",
-    "role": "Frontend Contributions (Enterprise Logistics Platform)",
-    "description": "Contributed to multiple frontend modules of a large-scale logistics platform during the early phase at Frugal Scientific, working across both the internal CRM system and a client-facing self-service portal. Delivered UI components, screens, and workflows for customer, vendor, consignment, and contract management, along with vendor RFQ (Request for Proposal) and response workflows. Also contributed to shared utilities and operational dashboards used across logistics teams.",
+    "role": "Frontend Engineering — Enterprise Platform Contributions",
+    "description": "Contributed to multiple frontend modules of a large-scale enterprise logistics platform during its early phase at Frugal Scientific, working across both the internal CRM system and a client-facing self-service portal. Implemented complex domain workflows on the frontend for customer, vendor, consignment, and contract management, along with vendor RFQ (Request for Proposal) creation and response flows. Focused on correctly modeling and rendering contract structures, multi-entity relationships, and state-driven workflows while maintaining consistency within a shared enterprise UI framework.",
     "link": "",
     "problem_statement": "The logistics platform required continuous frontend development across multiple functional areas to support customer onboarding, vendor engagement, contract handling, and RFQ workflows while maintaining consistency within an evolving enterprise system.",
     "design_decisions": [
-      "Implemented frontend screens and workflows for customer, vendor, consignment, and contract management modules",
+      "Implemented frontend workflows for customer, vendor, consignment, and contract management within a shared enterprise platform",
+      "Handled complex contract and RFQ data models, including nested entities and state-dependent UI behavior",
       "Contributed to vendor RFQ and response workflows supporting proposal creation, review, and status tracking",
-      "Worked on shared utilities and dashboards used across multiple logistics modules",
+      "Worked on shared utilities and operational dashboards reused across multiple logistics modules",
       "Ensured consistency with existing design systems, role-based access patterns, and shared components",
       "Collaborated closely with senior engineers, product managers, and designers within a live production environment"
     ],
     "impact_metrics": [
-      "Supported core logistics workflows for customer and vendor management within the CRM",
-      "Enabled smoother vendor RFQ and proposal handling through improved frontend workflows",
-      "Contributed to operational dashboards and utilities used by logistics teams",
+      "Supported core logistics workflows for customer, vendor, consignment, and contract management within the CRM",
+      "Enabled smoother vendor RFQ creation and proposal handling through structured frontend workflows",
+      "Contributed to shared dashboards and utilities used across logistics teams",
       "Delivered production features safely within a complex, multi-module enterprise system"
     ],
     "links": [
