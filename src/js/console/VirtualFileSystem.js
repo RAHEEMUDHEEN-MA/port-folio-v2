@@ -95,7 +95,7 @@ export class VirtualFileSystem {
 
     this.projectData.forEach(project => {
       const slug = this._generateSlug(project.title);
-      projectsDir.children[slug] = {
+      const projectNode = {
         type: 'directory',
         name: slug,
         path: `/projects/${slug}`,
@@ -127,6 +127,13 @@ export class VirtualFileSystem {
           }
         }
       };
+
+      // Add attachments directory if valid attachments exist
+      if (project.attachments && project.attachments.length > 0) {
+        projectNode.children['attachments'] = this._buildAttachmentsDirectory(project, slug);
+      }
+
+      projectsDir.children[slug] = projectNode;
     });
 
     return projectsDir;
@@ -510,6 +517,47 @@ Console Mode:
     }
 
     return content;
+  }
+
+  /**
+   * Build attachments directory for a project
+   * @private
+   */
+  _buildAttachmentsDirectory(project, slug) {
+    const attachmentsDir = {
+      type: 'directory',
+      name: 'attachments',
+      path: `/projects/${slug}/attachments`,
+      children: {}
+    };
+
+    project.attachments.forEach((att, index) => {
+      // Determine extension/filename
+      const isPdf = att.url.toLowerCase().endsWith('.pdf');
+      const ext = isPdf ? 'pdf' : 'jpg'; // Default to jpg for images if unknown
+
+      // Create a friendly filename from caption
+      let filename = this._generateSlug(att.caption || `attachment-${index + 1}`);
+      filename = `${filename}.${ext}`;
+
+      // Ensure uniqueness
+      let counter = 1;
+      let originalFilename = filename;
+      while (attachmentsDir.children[filename]) {
+        filename = `${originalFilename.replace(`.${ext}`, '')}-${counter}.${ext}`;
+        counter++;
+      }
+
+      attachmentsDir.children[filename] = {
+        type: 'file',
+        name: filename,
+        path: `/projects/${slug}/attachments/${filename}`,
+        content: `Attachment: ${att.caption}\nType: ${isPdf ? 'PDF Document' : 'Image'}\nURL: ${att.url}\n\nUse 'open' command to view.`,
+        url: att.url
+      };
+    });
+
+    return attachmentsDir;
   }
 
   /**

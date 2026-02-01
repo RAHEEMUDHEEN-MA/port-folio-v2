@@ -296,7 +296,7 @@ export default class Home {
       setTimeout(() => {
         toast.remove();
       }, 400);
-    }, 7500);
+    }, 3500);
 
     // Mark as shown in session
     sessionStorage.setItem('consoleToastShown', 'true');
