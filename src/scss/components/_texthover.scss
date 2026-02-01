@@ -82,6 +82,11 @@
       width: 100%;
       display: flex;
       justify-content: space-between;
+
+      @include media("<=phone") {
+        flex-direction: column;
+        gap: 1.2rem;
+      }
     }
   }
 
