@@ -19,7 +19,7 @@
       "Adopted as the standard frontend admin framework across 5+ production projects",
       "Used daily by co-developers across multiple teams",
       "Powers 100+ admin screens generated primarily from configuration",
-      "Reduced time to build a new menu ui section from 2–3 days to ~1 hour",
+      "Reduced time to build a new menu ui section from 2–3 days to 1–2 hours",
       "Reduced frontend codebase size by ~50% by eliminating duplicated admin logic",
       "Eliminated the equivalent of hundreds of thousands of lines of redundant UI code across products"
     ],
@@ -30,6 +30,13 @@
       "Supports role-based permissions, base filters, default sorting, and API module routing via config",
       "Configuration supports nested object mapping, constant value injection, computed fields, and custom cell renderers",
       "Custom React form components can be injected per module when advanced validation or workflows are required"
+    ],
+    "attachments": [
+      {
+        "url": "config-framework/Config-Driven_UI_framework_overview.pdf",
+        "caption": "Framework Overview",
+        "alt": "PDF Document: Config-Driven UI Framework Overview"
+      }
     ]
   },
   {

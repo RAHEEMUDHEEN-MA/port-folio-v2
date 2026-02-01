@@ -224,15 +224,28 @@ class ProjectPage {
   renderAttachments(project) {
     if (!project.attachments || project.attachments.length === 0) return '';
 
-    const items = project.attachments.map((att, index) => `
-      <button class="attachment-item" data-index="${index}" aria-label="View screenshot: ${att.caption}">
-        <img class="attachment-thumb" src="${att.url}" alt="${att.alt}" loading="lazy" />
-      </button>
-    `).join('');
+    const items = project.attachments.map((att, index) => {
+      const isPdf = att.url.toLowerCase().endsWith('.pdf');
+
+      if (isPdf) {
+        return `
+          <a href="${att.url}" target="_blank" rel="noopener noreferrer" class="attachment-item pdf-item" aria-label="Open PDF: ${att.caption}">
+            <span class="pdf-icon">PDF</span>
+            <span class="pdf-caption">${att.caption}</span>
+          </a>
+        `;
+      }
+
+      return `
+        <button class="attachment-item image-item" data-index="${index}" aria-label="View screenshot: ${att.caption}">
+          <img class="attachment-thumb" src="${att.url}" alt="${att.alt}" loading="lazy" />
+        </button>
+      `;
+    }).join('');
 
     return `
       <div class="section attachments-grid-container" data-scroll data-scroll-speed="0.5">
-         <h3>Interface Snapshots</h3>
+         <h3>Interface Snapshots & Docs</h3>
          <div class="attachments-grid">
            ${items}
          </div>
@@ -262,7 +275,7 @@ class ProjectPage {
 
     const modalImg = document.getElementById("js-modal-image");
     const modalCaption = document.getElementById("js-modal-caption");
-    const triggers = document.querySelectorAll(".attachment-item");
+    const triggers = document.querySelectorAll(".attachment-item.image-item");
     const closeBtns = [
       document.getElementById("js-modal-close"),
       document.getElementById("js-modal-close-btn")
