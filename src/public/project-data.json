@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "CONFIG-DRIVEN FRONTEND FRAMEWORK — INTERNAL UI PLATFORM",
-    "role": "Framework Architect & Ownership",
+    "role": "Frontend Platform Engineering & System Ownership",
     "description": "Architected and owned an internal config-driven frontend framework at Frugal Scientific, built on React (Vite), Material UI, Redux Toolkit, and Redux-Saga. The framework enables teams to generate complete enterprise admin interfaces—tables, forms, filters, drawers, permissions, and CRUD workflows—entirely from declarative configuration. Designed for high reuse, controlled extensibility, and long-term maintainability, the system is now the company-wide standard powering multiple production products.",
     "link": "",
     "problem_statement": "Across logistics and master-data products, admin interfaces followed nearly identical patterns but were implemented repeatedly with custom React components and Redux logic. This resulted in large-scale code duplication, inconsistent UX behavior, slow feature delivery, and high maintenance cost when requirements changed.",

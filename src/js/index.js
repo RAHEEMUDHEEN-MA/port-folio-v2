@@ -49,9 +49,16 @@ ScrollTrigger.scrollerProxy(scroll.el, {
 export default class Home {
   constructor(scroll) {
     this.locomotive = scroll;
+    this.init().catch(err => console.error("Initialization failed:", err));
+  }
+
+  async init() {
     this.heroTextAnimation();
     this.homeIntro();
-    this.homeAnimations();
+
+    await this.initProjects();
+    this.homeAnimations(); // Must run after projects are injected
+
     this.homeActions();
     this.themeActions();
     this.initConsole();
@@ -60,6 +67,123 @@ export default class Home {
     // Initialize Analytics
     initGA(import.meta.env.VITE_GA_MEASUREMENT_ID);
     this.initAnalyticsEvents();
+  }
+
+  async initProjects() {
+    try {
+      const response = await fetch('/project-data.json');
+      const projects = await response.json();
+
+      const section1Container = document.querySelector('[data-projects-section-1]');
+      const section2Container = document.querySelector('[data-projects-section-2]');
+
+      if (!section1Container || !section2Container) return;
+
+      // Split projects: First 4 go to section 1, rest to section 2.
+      // Note: original had 4 in top section (idx 0,1,2,3) and 3 in bottom (idx 4,5,6)
+      const section1Projects = projects.slice(0, 4);
+      const section2Projects = projects.slice(4);
+
+      const generateProjectHTML = (project, index, isFirstSection = true) => {
+        // Alternating logic:
+        // Index 0 (Even) -> Right Project (Line Left)
+        // Index 1 (Odd) -> Left Project (Line Right)
+        // Index 2 (Even) -> Right Project ...
+        // Note: For section 2, the index should continue strictly? 
+        // Original HTML:
+        // Sec 1 Item 0 (ID 1): Right Project
+        // Sec 1 Item 1 (ID 2): Left Project
+        // Sec 1 Item 2 (ID 3): Right Project
+        // Sec 1 Item 3 (ID 4): Left Project
+        // -- Section Break --
+        // Sec 2 Item 0 (ID 5): Right Project
+        // Sec 2 Item 1 (ID 6): Left Project
+        // Sec 2 Item 2 (ID 7): Right Project
+
+        // So we can just use the index within the loop if we want to reset strict alternation per section
+        // OR preserve global alternation.
+        // Looking at original innerHTML, sec 2 started with "Right Project".
+        // So both sections start with a "Right Project".
+        // Thus, we use local index for alternation.
+
+        const isEven = index % 2 === 0;
+        const lineClass = isEven ? 'left' : 'right';
+        const projectClass = isEven ? 'right' : 'left';
+        const titleScrollSpeed = isEven ? '2' : '-2';
+        const titleAlign = isEven ? 'right' : 'left';
+
+        // Special label logic for the very first project
+        let labelHTML = '';
+        if (isFirstSection && index === 0) {
+          // Featured label
+          labelHTML = `
+            <div class="label__inner label-1">
+               <p>FEATURED <br> PROJECTS (${projects.length})</p>
+               <p>${project.role}</p>
+             </div>`;
+        } else {
+          labelHTML = `
+            <div class="label__inner">
+               <p>${project.role}</p>
+             </div>`;
+        }
+
+        const deepDiveIcon = `
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+             <path d="M12 4V20M4 12H20" stroke="#777" stroke-width="2"></path>
+          </svg>
+        `;
+
+        return `
+          <span class="home__projects__line ${lineClass}"><span></span></span>
+          <div class="home__projects__project ${projectClass}">
+            <div class="home__projects__project__label">
+              ${labelHTML}
+            </div>
+            
+            <a class="home__projects__project__link">
+              <h1 class="home__projects__project__title" data-scroll="" data-scroll-direction="horizontal" data-scroll-speed="${titleScrollSpeed}">
+                <span class="inline-ovh">
+                  <div class="title__main ${titleAlign}">
+                    <span class="slide-up" data-content="${project.title}" aria-hidden="true"></span>
+                    ${project.title}
+                  </div>
+                </span>
+              </h1>
+            </a>
+            
+            <div class="project__link">
+              <a href="/project.html?id=${project.id}" class="c-button deep-dive-trigger">
+                <span class="c-link">
+                  <span class="c-link__inner">
+                    <span>
+                       Deep Dive
+                       <span class="share-icon">${deepDiveIcon}</span>
+                    </span>
+                    <span class="c-link__animated">
+                       Deep Dive
+                       <span class="share-icon">${deepDiveIcon}</span>
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </div>
+          </div>
+        `;
+      };
+
+      section1Container.innerHTML = section1Projects.map((p, i) => generateProjectHTML(p, i, true)).join('');
+      section2Container.innerHTML = section2Projects.map((p, i) => generateProjectHTML(p, i, false)).join('');
+
+      // Update locomotive scroll after DOM changes
+      this.locomotive.update();
+      // Also refresh ScrollTrigger
+      ScrollTrigger.refresh();
+
+    } catch (error) {
+      console.error("Failed to load project data:", error);
+      // Fallback or empty state could go here
+    }
   }
 
 
