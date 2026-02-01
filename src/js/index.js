@@ -56,6 +56,7 @@ export default class Home {
     this.heroTextAnimation();
     this.homeIntro();
 
+    await this.initProfile();
     await this.initProjects();
     this.homeAnimations(); // Must run after projects are injected
 
@@ -67,6 +68,73 @@ export default class Home {
     // Initialize Analytics
     initGA(import.meta.env.VITE_GA_MEASUREMENT_ID);
     this.initAnalyticsEvents();
+  }
+
+  async initProfile() {
+    try {
+      const response = await fetch('/profile-data.json');
+      const data = await response.json();
+
+      // 1. About
+      const aboutContainer = document.querySelector('.hero__paragraph');
+      if (aboutContainer && data.about) {
+        aboutContainer.innerHTML = data.about.description;
+      }
+
+      // 2. Technical Approach
+      const techApproachContainer = document.querySelector('.home__content');
+      if (techApproachContainer && data.technical_approach) {
+        techApproachContainer.innerHTML = `
+          <h2 class="home__content__title">${data.technical_approach.title}</h2>
+          <p class="home__content__desc">${data.technical_approach.description}</p>
+        `;
+      }
+
+      // 3. Technical Stack
+      const techStackContainer = document.querySelector('.home__awards__table');
+      if (techStackContainer && data.technical_stack && data.technical_stack.items) {
+        const itemsHTML = data.technical_stack.items.map(item => `
+            <div class="awards__item" data-fade-in="">${item}</div>
+         `).join('');
+        techStackContainer.innerHTML = itemsHTML;
+      }
+
+      // 4. Education
+      const eduContainer = document.querySelector('.home__awards__stack');
+      if (eduContainer && data.education) {
+        const eduItems = data.education.items.map(item => `${item} <br>`).join(' ');
+        const githubLink = data.education.github ? `<a href="${data.education.github.url}" target="_blank" rel="noopener noreferrer">${data.education.github.label}</a>` : '';
+
+        eduContainer.innerHTML = `
+          <h2 class="home__content__title">${data.education.title}</h2>
+          <p class="home__content__desc">
+            ${eduItems}
+            ${githubLink}
+          </p>
+        `;
+      }
+
+      // 5. Professional Focus
+      const focusContainer = document.querySelector('.home__awards__ice');
+      if (focusContainer && data.professional_focus) {
+        focusContainer.innerHTML = `
+          <h2 class="home__content__title">${data.professional_focus.title}</h2>
+          <p class="home__content__desc">${data.professional_focus.description}</p>
+        `;
+      }
+
+      // Re-initialize contact buttons inside dynamic content
+      // Since 'About' and 'Prof Focus' might have contact buttons
+      const newContactButtons = document.querySelectorAll(".contact-scroll");
+      mapEach(newContactButtons, (button) => {
+        button.onclick = () => {
+          this.locomotive.scrollTo(footer);
+        };
+      });
+
+    } catch (error) {
+      console.error("Failed to load profile data:", error);
+    }
   }
 
   async initProjects() {
