@@ -41,25 +41,25 @@
   },
   {
     "id": 2,
-    "title": "ODR SESSION PLATFORM — REAL-TIME EVENT SYSTEMS",
-    "role": "Real-Time Systems & Event Orchestration",
-    "description": "Designed and built a SaaS ODR session and event management platform at Frugal Scientific to support scheduled online arbitration and mediation workflows. Enabled arbitrators to create events, invite participants via email and SMS, and conduct structured virtual proceedings through a public FIFO-based lobby with turn-controlled access and chat. Implemented mobile OTP-based authentication with unique invite tokens for frictionless public access, real-time state synchronization using WebSockets, and resilient rejoin handling that places disconnected participants back into the lobby queue. Automated session notifications, reminders, and lifecycle management using cron-based background jobs, balancing real-time responsiveness with system reliability.",
+    "title": "ODR Session Platform — Turn-Based Video Session Orchestration",
+    "role": "Product Engineer — Real-Time Orchestration & Access Control",
+    "description": "Designed and implemented a session orchestration layer to solve turn-based access control for online arbitration and mediation workflows within an existing ODR platform. Based on a product-level direction defined by the CTO to avoid building a custom video conferencing system, I designed a real-time orchestration solution that integrates with existing tools like Google Meet and Zoom. The system manages participant sequencing, access control, and session lifecycle through a FIFO waiting lobby, controlled meeting-link reveal, and automated notifications, enabling structured virtual proceedings without additional video infrastructure.",
     "link": "",
-    "problem_statement": "Arbitrators and mediators were manually coordinating scheduled online arbitration and mediation sessions using external video links and ad-hoc communication, resulting in poor access control, lack of structured turn management, and high operational overhead.",
+    "problem_statement": "In the existing ODR platform, arbitrators and mediators were manually sharing public video conference links, making it difficult to enforce turn-based participation, prevent early entry, and manage large scheduled sessions. While building a custom video system could address this, it would significantly increase complexity and maintenance cost.",
     "architecture_image": "odr-session-management/ODR-EVENT-SESSION-MANAGEMENT-SYSTEM-FLOW-ARCHITUCTURE.svg",
     "design_decisions": [
-      "Designed a public FIFO-based lobby to manage participant sequencing and fairness",
-      "Implemented turn-controlled access to enforce structured arbitration and mediation flow",
-      "Used WebSockets for real-time state synchronization across lobby, turns, and chat",
-      "Implemented mobile OTP authentication with unique invite tokens for low-friction public access",
-      "Handled session lifecycle, drop/rejoin scenarios, and participant re-queuing for reliability",
-      "Used cron-based background jobs for automated invites, reminders, and session lifecycle events"
+      "Designed a FIFO-based waiting lobby to manage fair, turn-based participant sequencing",
+      "Implemented controlled reveal of existing video meeting links instead of building a custom video layer",
+      "Used WebSockets (Socket.IO) to synchronize lobby state, queue position, and chat in real time",
+      "Implemented OTP-based authentication with unique invite tokens for low-friction public access",
+      "Handled disconnect and rejoin scenarios while preserving queue position and session state",
+      "Automated invitations, reminders, and session lifecycle transitions using cron-based background jobs"
     ],
     "impact_metrics": [
-      "Supported scheduled online arbitration and mediation events with up to ~50 participants per session",
-      "Enabled multiple concurrent ODR events with controlled access and session flow",
-      "Eliminated manual coordination of virtual dispute resolution sessions",
-      "Improved reliability and structure of remote arbitration and mediation workflows"
+      "Supported 50+ participants per session with real-time queue visibility and orderly turn management",
+      "Enabled multiple concurrent arbitration and mediation sessions",
+      "Significantly reduced manual coordination and moderation effort for arbitrators",
+      "Delivered a focused, low-maintenance orchestration layer without custom video infrastructure"
     ]
   },
   {
