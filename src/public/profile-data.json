@@ -1,27 +1,29 @@
 {
     "about": {
         "title": "About",
-        "description": "<span class=\"first-word\">About</span> &nbsp; I am a product-focused full stack engineer based in Bangalore, India, experienced in designing and delivering scalable MERN applications for real-world business systems. I’ve built reusable, config-driven React systems that significantly reduced frontend code across multiple projects. Comfortable owning features end-to-end, collaborating with product and design teams at <span>Frugal Scientific,</span> and shipping production-ready systems used by active users. I regularly design APIs, manage data models, handle real-time communication, and deploy systems end-to-end—not just the UI layer."
+        "description": "<span class=\"first-word\">I build</span> &nbsp; systems that make complex products simpler to build, operate, and evolve. I am a product-focused full stack engineer based in Bangalore, India, with experience designing and delivering production systems across enterprise platforms, fintech, logistics, AI-enabled applications, and custom business software. My work spans reusable frontend platforms, real-time systems, data-driven dashboards, AI-powered product experiences, and end-to-end application development. I enjoy taking ambiguous business problems, turning them into clear system boundaries and usable products, and owning the engineering from architecture through deployment."
     },
     "technical_approach": {
         "title": "TECHNICAL APPROACH",
-        "description": "I specialize in building <span>config-driven, reusable systems</span> that reduce code duplication and accelerate delivery. My work focuses on creating scalable platforms that balance <span>technical excellence</span> with <span>business impact</span>, from real-time logistics platforms to fintech dashboards and custom administrative systems."
+        "description": "I focus on building <span>reusable systems</span> rather than repeatedly solving the same problem. My work spans config-driven architectures, full-stack product development, real-time systems, AI-integrated interfaces, API design, and data-driven applications. I care about finding the right abstraction, keeping system boundaries clear, and balancing <span>engineering quality</span> with <span>business impact</span>."
     },
     "technical_stack": {
         "title": "TECHNICAL STACK",
         "items": [
-            "JavaScript (ES6+)",
+            "JavaScript (ES6+) ⏤ TypeScript",
+            "React.js ⏤ Frontend Architecture & Product UI",
             "Node.js ⏤ Express.js",
-            "MongoDB ⏤ Database Design",
-            "API Design & Integration",
-            "WebSockets ⏤ Real-time Systems",
-            "React.js ⏤ Config-driven UI & System Design",
+            "MongoDB ⏤ Data Modeling & Database Design",
+            "REST APIs ⏤ API Design & Integration",
+            "LLM Integration ⏤ Generative UI & AI Workflows",
             "Redux ⏤ State Management",
-            "MUI, Tailwind CSS ⏤ Responsive UI",
-            "Git, GitHub ⏤ CI/CD Basics",
-            "Nginx, PM2 ⏤ VPS Deployment",
-            "Cron Jobs ⏤ Automation",
-            "Component Reusability"
+            "WebSockets ⏤ Real-time Systems",
+            "MUI ⏤ Tailwind CSS ⏤ Responsive UI",
+            "Google Maps ⏤ OpenStreetMap ⏤ Geo Systems",
+            "Git ⏤ GitHub ⏤ CI/CD Basics",
+            "Nginx ⏤ PM2 ⏤ VPS Deployment",
+            "Cron Jobs ⏤ Background Automation",
+            "Config-Driven UI ⏤ Component Reusability"
         ]
     },
     "education": {
@@ -37,6 +39,6 @@
     },
     "professional_focus": {
         "title": "PROFESSIONAL FOCUS",
-        "description": "I'm passionate about building scalable, maintainable systems that solve real business problems. My focus areas include designing clear system boundaries, building product features end-to-end, and creating reusable frontend platforms that accelerate team velocity while remaining backend-aware. <button class=\"contact-scroll\">GET IN TOUCH</button> to discuss opportunities."
+        "description": "I am interested in building <span>products, platforms, and systems</span> where strong engineering directly improves how people work. My focus is on product engineering, scalable frontend architecture, full-stack ownership, AI-enabled interfaces, and solving real business problems with thoughtful system design. <button class=\"contact-scroll\">GET IN TOUCH</button> to discuss opportunities."
     }
 }

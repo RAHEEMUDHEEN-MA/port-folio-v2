@@ -61,6 +61,7 @@ class ProjectPage {
         return;
       }
 
+      this.injectSEO(project);
       this.renderProject(project, container);
 
       // Update scroll after content injection
@@ -147,6 +148,83 @@ class ProjectPage {
         await toggleConsole(e.target.checked);
       });
     }
+  }
+
+  injectSEO(project) {
+    const domain = "https://raheemudheen.com";
+    const canonicalUrl = `${domain}/project.html?id=${project.id}`;
+    
+    // 1. Update Title
+    document.title = `${project.title} — RAHEEMUDHEEN M A`;
+    
+    // Helper to update meta tags
+    const updateMeta = (name, content, attribute = 'name') => {
+      if (!content) return;
+      let meta = document.querySelector(`meta[${attribute}="${name}"]`);
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute(attribute, name);
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', content);
+    };
+
+    // 2. Standard & Open Graph Meta Tags
+    const description = project.description || "";
+    const imageUrl = project.architecture_image ? `${domain}/${project.architecture_image}` : `${domain}/og-image.jpg`;
+
+    updateMeta('description', description, 'name');
+    
+    updateMeta('og:title', project.title, 'property');
+    updateMeta('og:description', description, 'property');
+    updateMeta('og:url', canonicalUrl, 'property');
+    updateMeta('og:type', 'article', 'property');
+    updateMeta('og:image', imageUrl, 'property');
+    
+    updateMeta('twitter:title', project.title, 'property');
+    updateMeta('twitter:description', description, 'property');
+    updateMeta('twitter:image', imageUrl, 'property');
+
+    // 3. Canonical Link
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', canonicalUrl);
+
+    // 4. JSON-LD Structured Data
+    const existingScript = document.getElementById('project-json-ld');
+    if (existingScript) existingScript.remove();
+
+    const isSoftwareApp = /platform|dashboard|system|ui|framework/i.test(project.title) || /platform|dashboard|system|ui|framework/i.test(project.description);
+    const schemaType = isSoftwareApp ? "SoftwareApplication" : "CreativeWork";
+    
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": schemaType,
+      "name": project.title,
+      "description": project.description,
+      "url": canonicalUrl,
+      "author": {
+        "@type": "Person",
+        "name": "Raheemudheen M A"
+      }
+    };
+
+    if (isSoftwareApp) {
+      structuredData.applicationCategory = "WebApplication";
+    }
+    if (project.architecture_image) {
+      structuredData.image = imageUrl;
+    }
+
+    const script = document.createElement('script');
+    script.id = 'project-json-ld';
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    document.head.appendChild(script);
   }
 
   renderProject(project, container) {
