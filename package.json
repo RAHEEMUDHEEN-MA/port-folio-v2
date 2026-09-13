@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "predev": "node scripts/predev.js",
-    "dev": "vite src --port 3000",
+    "dev": "vite src --port 3000 --host",
     "prebuild": "node scripts/predev.js",
     "build": "vite build src",
     "preview": "vite preview"

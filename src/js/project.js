@@ -143,25 +143,25 @@ class ProjectPage {
 
     const html = `
       <div class="project-header" data-scroll-section>
-        <h1 class="project-title" data-scroll data-scroll-speed="2" data-scroll-position="top" data-scroll-direction="vertical">${project.title}</h1>
-        <p class="project-role" data-scroll data-scroll-speed="1" data-scroll-position="top" data-scroll-direction="vertical">${project.role}</p>
+        <h1 class="project-title">${project.title}</h1>
+        <p class="project-role">${project.role}</p>
       </div>
 
       <div class="project-body" data-scroll-section>
-         <div class="section context" data-scroll data-scroll-speed="2" data-scroll-direction="horizontal">
+         <div class="section context">
            <h3>Context</h3>
            <p>${project.description}</p>
          </div>
 
          ${project.problem_statement ? `
-         <div class="section problem" data-scroll data-scroll-speed="-2" data-scroll-direction="horizontal">
+         <div class="section problem">
            <h3>Problem Statement</h3>
            <p>${project.problem_statement}</p>
          </div>
          ` : ''}
 
          ${project.architecture_image ? `
-         <div class="section architecture" data-scroll data-scroll-speed="2" data-scroll-direction="horizontal">
+         <div class="section architecture">
            <h3>Architecture Overview</h3>
            <div class="architecture-diagram">
               <img src="${project.architecture_image}" alt="Architecture Diagram for ${project.title}" class="architecture-img" style="max-width: 100%; height: auto;" onerror="this.closest('.section.architecture').style.display='none'" />
@@ -170,7 +170,7 @@ class ProjectPage {
          ` : ''}
 
          ${technicalHighlights ? `
-         <div class="section technical-highlights" data-scroll data-scroll-speed="-2" data-scroll-direction="horizontal">
+         <div class="section technical-highlights">
            <h3>Technical Highlights</h3>
            <ul class="styled-list">
              ${technicalHighlights}
@@ -179,7 +179,7 @@ class ProjectPage {
          ` : ''}
 
          ${designDecisions ? `
-         <div class="section decisions" data-scroll data-scroll-speed="2" data-scroll-direction="horizontal">
+         <div class="section decisions">
            <h3>System Flow / Design Decisions</h3>
            <ul class="styled-list">
              ${designDecisions}
@@ -188,7 +188,7 @@ class ProjectPage {
          ` : ''}
 
          ${impactMetrics ? `
-         <div class="section impact" data-scroll data-scroll-speed="-2" data-scroll-direction="horizontal">
+         <div class="section impact">
            <h3>Impact & Outcomes</h3>
            <ul class="styled-list">
              ${impactMetrics}
@@ -197,7 +197,7 @@ class ProjectPage {
          ` : ''}
 
          ${links ? `
-         <div class="section pro-links" data-scroll data-scroll-speed="1" data-scroll-direction="horizontal">
+         <div class="section pro-links">
            ${links}
          </div>
          ` : ''}
@@ -210,10 +210,22 @@ class ProjectPage {
     container.innerHTML = html;
     this.initModalListeners();
 
-    // Refresh for lenis and re-init parallax
+    // Refresh for lenis and init reveal animations
     setTimeout(() => {
       ScrollTrigger.refresh();
-      this.initParallax();
+      
+      gsap.utils.toArray([".project-title", ".project-role", ".section"]).forEach((el) => {
+        gsap.from(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+          },
+          duration: 1.5,
+          y: 50,
+          opacity: 0,
+          ease: "power4.out",
+        });
+      });
     }, 100);
   }
 
@@ -240,7 +252,7 @@ class ProjectPage {
     }).join('');
 
     return `
-      <div class="section attachments-grid-container" data-scroll data-scroll-speed="0.5">
+      <div class="section attachments-grid-container">
          <h3>Interface Snapshots & Docs</h3>
          <div class="attachments-grid">
            ${items}
