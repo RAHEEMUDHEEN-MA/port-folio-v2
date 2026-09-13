@@ -197,7 +197,7 @@ export default class Home {
             </div>
             
             <a class="home__projects__project__link">
-              <h1 class="home__projects__project__title" data-scroll="" data-scroll-direction="horizontal" data-scroll-speed="${titleScrollSpeed}">
+              <h1 class="home__projects__project__title">
                 <span class="inline-ovh">
                   <div class="title__main ${titleAlign}">
                     <span class="slide-up" data-content="${project.title}" aria-hidden="true"></span>
@@ -343,23 +343,28 @@ export default class Home {
       });
     });
 
-    if (window.innerWidth <= 768) {
-      gsap.utils.toArray(".home__projects__project").forEach((el) => {
-        const text = el.querySelector(".title__main");
-        const link = el.querySelector(".project__link");
-        gsap.from([text, link], {
-          scrollTrigger: {
-            trigger: el,
-          },
-          duration: 1.5,
-          yPercent: 100,
-          stagger: {
-            amount: 0.2,
-          },
-          ease: "power4.out",
-        });
+    gsap.utils.toArray(".home__projects__project").forEach((el) => {
+      const line = el.previousElementSibling; // The home__projects__line
+      const label = el.querySelector(".home__projects__project__label");
+      const text = el.querySelector(".title__main");
+      const info = el.querySelector(".project__info");
+      
+      gsap.from([line, label, text, info], {
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%", // Trigger when project enters viewport
+        },
+        duration: 1.5,
+        yPercent: 100,
+        opacity: 0,
+        stagger: {
+          amount: 0.3,
+        },
+        ease: "power4.out",
       });
+    });
 
+    if (window.innerWidth <= 768) {
       const awardsTl = gsap.timeline({
         defaults: {
           ease: "power1.out",
