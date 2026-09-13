@@ -14,6 +14,20 @@ const toCopyText = document.querySelector(".to-copy span");
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Ultimate Safari Swipe-Back Hack
+window.addEventListener("pageshow", function (event) {
+  if (event.persisted) {
+    // Force a complete synchronous reflow of the body to unfreeze the iOS compositor
+    setTimeout(() => {
+      document.body.style.display = "none";
+      document.body.offsetHeight; // force reflow
+      document.body.style.display = "";
+      
+      if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+    }, 0);
+  }
+});
+
 const scroll = new Lenis({
   lerp: 0.06,
   smoothWheel: true,
@@ -353,6 +367,7 @@ export default class Home {
         scrollTrigger: {
           trigger: el,
           start: "top 85%", // Trigger when project enters viewport
+          toggleActions: "play none none reverse",
         },
         duration: 1.5,
         yPercent: 100,

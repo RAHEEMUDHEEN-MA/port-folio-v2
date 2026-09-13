@@ -169,10 +169,10 @@
         }
 
         &__bottom {
-          justify-content: space-between;
-
           @include media(">tablet") {
             display: flex;
+            justify-content: flex-start;
+            gap: 8vw;
           }
         }
 
@@ -198,8 +198,9 @@
           }
 
           @include media("<=phone") {
-            max-width: 255px;
-            margin-left: auto;
+            max-width: 100%;
+            margin-left: 0;
+            padding: 1rem 0 3rem;
           }
         }
       }

@@ -4,6 +4,20 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Ultimate Safari Swipe-Back Hack
+window.addEventListener("pageshow", function (event) {
+  if (event.persisted) {
+    // Force a complete synchronous reflow of the body to unfreeze the iOS compositor
+    setTimeout(() => {
+      document.body.style.display = "none";
+      document.body.offsetHeight; // force reflow
+      document.body.style.display = "";
+      
+      if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+    }, 0);
+  }
+});
+
 class ProjectPage {
   constructor() {
     this.initScroll();
@@ -219,6 +233,7 @@ class ProjectPage {
           scrollTrigger: {
             trigger: el,
             start: "top 85%",
+            toggleActions: "play none none reverse",
           },
           duration: 1.5,
           y: 50,
