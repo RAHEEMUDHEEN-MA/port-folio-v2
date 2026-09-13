@@ -1,4 +1,4 @@
-import LoconativeScroll from "loconative-scroll";
+import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { copyText } from "./utils/index";
@@ -14,37 +14,17 @@ const toCopyText = document.querySelector(".to-copy span");
 
 gsap.registerPlugin(ScrollTrigger);
 
-const scroll = new LoconativeScroll({
-  el: scrollEl,
-  smooth: true,
+const scroll = new Lenis({
   lerp: 0.06,
-  tablet: {
-    breakpoint: 768,
-  },
+  smoothWheel: true,
 });
 
-setTimeout(() => {
-  scroll.update();
-}, 1000);
+gsap.ticker.add((time) => {
+  scroll.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0);
 
 scroll.on("scroll", ScrollTrigger.update);
-
-ScrollTrigger.scrollerProxy(scroll.el, {
-  scrollTop(value) {
-    return arguments.length
-      ? scroll.scrollTo(value, 0, 0)
-      : scroll.scroll.instance.scroll.y;
-  },
-
-  getBoundingClientRect() {
-    return {
-      top: 0,
-      left: 0,
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-  },
-});
 
 export default class Home {
   constructor(scroll) {
@@ -59,6 +39,7 @@ export default class Home {
     await this.initProfile();
     await this.initProjects();
     this.homeAnimations(); // Must run after projects are injected
+    this.initParallax();
 
     this.homeActions();
     this.themeActions();
@@ -196,9 +177,15 @@ export default class Home {
              </div>`;
         }
 
-        const deepDiveIcon = `
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M12 4V20M4 12H20" stroke="#777" stroke-width="2"></path>
+        const truncateText = (text, maxLength) => {
+          if (!text) return "";
+          if (text.length <= maxLength) return text;
+          return text.substring(0, maxLength).trim() + "...";
+        };
+
+        const rightArrowIcon = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         `;
 
@@ -220,20 +207,11 @@ export default class Home {
               </h1>
             </a>
             
-            <div class="project__link">
-              <a href="/project.html?id=${project.id}" class="c-button deep-dive-trigger">
-                <span class="c-link">
-                  <span class="c-link__inner">
-                    <span>
-                       Deep Dive
-                       <span class="share-icon">${deepDiveIcon}</span>
-                    </span>
-                    <span class="c-link__animated">
-                       Deep Dive
-                       <span class="share-icon">${deepDiveIcon}</span>
-                    </span>
-                  </span>
-                </span>
+            <div class="project__info">
+              <p class="project__description-snippet">${truncateText(project.description, 120)}</p>
+              <a href="/project.html?id=${project.id}" class="read-more-link">
+                READ MORE 
+                <span class="arrow">${rightArrowIcon}</span>
               </a>
             </div>
           </div>
@@ -243,8 +221,6 @@ export default class Home {
       section1Container.innerHTML = section1Projects.map((p, i) => generateProjectHTML(p, i, true)).join('');
       section2Container.innerHTML = section2Projects.map((p, i) => generateProjectHTML(p, i, false)).join('');
 
-      // Update locomotive scroll after DOM changes
-      this.locomotive.update();
       // Also refresh ScrollTrigger
       ScrollTrigger.refresh();
 
@@ -350,7 +326,6 @@ export default class Home {
         duration: 1.5,
         scrollTrigger: {
           trigger: el,
-          scroller: "[data-scroll-container]",
         },
         scaleX: 0,
       });
@@ -360,7 +335,6 @@ export default class Home {
       gsap.from(el, {
         scrollTrigger: {
           trigger: el,
-          scroller: "[data-scroll-container]",
         },
         duration: 1.5,
         yPercent: 100,
@@ -376,7 +350,6 @@ export default class Home {
         gsap.from([text, link], {
           scrollTrigger: {
             trigger: el,
-            scroller: "[data-scroll-container]",
           },
           duration: 1.5,
           yPercent: 100,
@@ -393,7 +366,6 @@ export default class Home {
         },
         scrollTrigger: {
           trigger: ".home__awards",
-          scroller: "[data-scroll-container]",
         },
       });
       awardsTl.from(".awards__title span", {
@@ -534,12 +506,11 @@ export default class Home {
 
     // 4. Scroll Depth (> 70%)
     let scrollTracked = false;
-    this.locomotive.on("scroll", (args) => {
+    this.locomotive.on("scroll", (lenis) => {
       if (scrollTracked) return;
 
-      const { scroll, limit } = args;
-      if (limit.y > 0) {
-        const percentage = scroll.y / limit.y;
+      if (lenis.limit > 0) {
+        const percentage = lenis.scroll / lenis.limit;
         if (percentage > 0.7) {
           trackEvent('scroll_depth', { depth: '70%' });
           scrollTracked = true;
@@ -552,13 +523,38 @@ export default class Home {
     gsap.to(".hero__title__dash.desktop", {
       scrollTrigger: {
         trigger: ".hero__title",
-        scroller: "[data-scroll-container]",
         scrub: true,
         start: "-8% 9%",
         end: "110% 20%",
       },
       scaleX: 4,
       ease: "none",
+    });
+  }
+
+  initParallax() {
+    const elements = document.querySelectorAll('[data-scroll-speed]');
+    elements.forEach(el => {
+      const speed = parseFloat(el.getAttribute('data-scroll-speed'));
+      if (isNaN(speed) || speed === 0) return;
+      
+      const direction = el.getAttribute('data-scroll-direction') || 'vertical';
+      const position = el.getAttribute('data-scroll-position');
+      
+      const distance = speed * 50; 
+      
+      const movement = direction === 'horizontal' ? { x: distance } : { y: distance };
+      
+      gsap.to(el, {
+        ...movement,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: position === 'top' ? document.body : el,
+          start: position === 'top' ? 'top top' : 'top bottom',
+          end: position === 'top' ? 'bottom top' : 'bottom top',
+          scrub: true,
+        }
+      });
     });
   }
 }

@@ -1,4 +1,4 @@
-import LoconativeScroll from "loconative-scroll";
+import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -13,28 +13,18 @@ class ProjectPage {
   }
 
   initScroll() {
-    this.scroll = new LoconativeScroll({
-      el: document.querySelector("[data-scroll-container]"),
-      smooth: true,
+    this.scroll = new Lenis({
       lerp: 0.06,
-      tablet: {
-        breakpoint: 768,
-      },
+      smoothWheel: true,
     });
+
+    gsap.ticker.add((time) => {
+      this.scroll.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
 
     // Update ScrollTrigger on scroll
     this.scroll.on("scroll", ScrollTrigger.update);
-    ScrollTrigger.scrollerProxy("[data-scroll-container]", {
-      scrollTop(value) {
-        return arguments.length ? this.scroll.scrollTo(value, 0, 0) : this.scroll.scroll.instance.scroll.y;
-      },
-      getBoundingClientRect() {
-        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-      }
-    });
-
-    // Refresh after standard updates
-    setTimeout(() => this.scroll.update(), 500);
   }
 
   async loadProject() {
@@ -61,7 +51,6 @@ class ProjectPage {
 
       // Update scroll after content injection
       setTimeout(() => {
-        this.scroll.update();
         ScrollTrigger.refresh();
       }, 100);
 
@@ -221,10 +210,10 @@ class ProjectPage {
     container.innerHTML = html;
     this.initModalListeners();
 
-    // Refresh for locomotive
+    // Refresh for lenis and re-init parallax
     setTimeout(() => {
-      this.scroll.update();
       ScrollTrigger.refresh();
+      this.initParallax();
     }, 100);
   }
 
@@ -317,6 +306,32 @@ class ProjectPage {
       if (e.key === "Escape" && modal.classList.contains("is-active")) {
         closeModal();
       }
+    });
+  }
+
+  initParallax() {
+    const elements = document.querySelectorAll('[data-scroll-speed]');
+    elements.forEach(el => {
+      const speed = parseFloat(el.getAttribute('data-scroll-speed'));
+      if (isNaN(speed) || speed === 0) return;
+      
+      const direction = el.getAttribute('data-scroll-direction') || 'vertical';
+      const position = el.getAttribute('data-scroll-position');
+      
+      const distance = speed * 50; 
+      
+      const movement = direction === 'horizontal' ? { x: distance } : { y: distance };
+      
+      gsap.to(el, {
+        ...movement,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: position === 'top' ? document.body : el,
+          start: position === 'top' ? 'top top' : 'top bottom',
+          end: position === 'top' ? 'bottom top' : 'bottom top',
+          scrub: true,
+        }
+      });
     });
   }
 }

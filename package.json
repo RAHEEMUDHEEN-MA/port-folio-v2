@@ -19,6 +19,6 @@
   },
   "dependencies": {
     "gsap": "^3.7.0",
-    "loconative-scroll": "https://github.com/quentinhocde/loconative-scroll"
+    "lenis": "^1.3.26"
   }
 }
