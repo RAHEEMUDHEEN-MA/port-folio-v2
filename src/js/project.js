@@ -4,6 +4,27 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Haptic & Visual Press Feedback
+const hapticSelectors = [
+  '#js-theme-toggle',
+  '.contact-scroll',
+  '.nav__button',
+  '.nav__link',
+  '.home__nav a',
+  '.email',
+  '.to-copy',
+  '.attachment-item',
+  '.modal-close-btn'
+].join(', ');
+
+document.addEventListener('pointerdown', (e) => {
+  if (e.target.closest(hapticSelectors)) {
+    if (navigator.vibrate) {
+      try { navigator.vibrate(10); } catch(e) {}
+    }
+  }
+});
+
 // Ultimate Safari Swipe-Back Hack
 window.addEventListener("pageshow", function (event) {
   if (event.persisted) {
@@ -105,17 +126,45 @@ class ProjectPage {
 
   themeActions() {
     const themeToggle = document.getElementById("js-theme-toggle");
-    // Initialize theme from localStorage
-    // Initialize theme from localStorage
-    const storedTheme = localStorage.getItem("theme");
-    if (!storedTheme || storedTheme === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-      if (!storedTheme) localStorage.setItem("theme", "dark");
+    
+    const applyTheme = (theme) => {
+      if (theme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+      } else if (theme === "light") {
+        document.documentElement.removeAttribute("data-theme");
+      } else {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        } else {
+          document.documentElement.removeAttribute("data-theme");
+        }
+      }
+    };
+
+    const storedTheme = localStorage.getItem("theme") || "system";
+    applyTheme(storedTheme);
+
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (!localStorage.getItem("theme") || localStorage.getItem("theme") === "system") {
+          applyTheme("system");
+        }
+      });
     }
 
-    // Since we don't have the toggle button in the simple nav yet, 
-    // we just ensure the theme is applied. 
-    // If you add a toggle in project.html, use the same logic as index.js
+    if (themeToggle) {
+      themeToggle.onclick = () => {
+        let current = localStorage.getItem("theme") || "system";
+        let next = current === "system" ? "light" : current === "light" ? "dark" : "system";
+        
+        if (next === "system") {
+          localStorage.removeItem("theme");
+        } else {
+          localStorage.setItem("theme", next);
+        }
+        applyTheme(next);
+      };
+    }
   }
 
   async initConsole() {

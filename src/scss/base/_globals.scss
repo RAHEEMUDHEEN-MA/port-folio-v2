@@ -239,3 +239,17 @@ body {
     }
   }
 }
+
+// Visual press feedback
+#js-theme-toggle:active,
+.contact-scroll:active,
+.nav__button:active,
+.nav__link:active,
+.home__nav a:active,
+.email:active,
+.to-copy:active,
+.attachment-item:active,
+.modal-close-btn:active {
+  transform: scale(0.95) !important;
+  transition: transform 0.1s ease !important;
+}
