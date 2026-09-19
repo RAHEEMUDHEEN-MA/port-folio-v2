@@ -2,41 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://raheemudheen.com/</loc>
-    <changefreq>weekly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://raheemudheen.com/project.html?id=config-driven-frontend-framework</loc>
+    <loc>https://raheemudheen.com/projects/config-driven-frontend-framework/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://raheemudheen.com/project.html?id=genui-ai-powered-generative-ui</loc>
+    <loc>https://raheemudheen.com/projects/genui-ai-powered-generative-ui/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://raheemudheen.com/project.html?id=odr-session-platform-video-orchestration</loc>
+    <loc>https://raheemudheen.com/projects/odr-session-platform-video-orchestration/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://raheemudheen.com/project.html?id=diatadmin-administrative-system</loc>
+    <loc>https://raheemudheen.com/projects/diatadmin-administrative-system/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://raheemudheen.com/project.html?id=production-admin-platform-refactor</loc>
+    <loc>https://raheemudheen.com/projects/fintech-field-operations-dashboard/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://raheemudheen.com/project.html?id=logistics-crm-ui-ux-restructuring</loc>
+    <loc>https://raheemudheen.com/projects/production-admin-platform-refactor/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://raheemudheen.com/project.html?id=logistics-platform-contributions</loc>
+    <loc>https://raheemudheen.com/projects/logistics-crm-ui-ux-restructuring/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raheemudheen.com/projects/logistics-platform-contributions/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

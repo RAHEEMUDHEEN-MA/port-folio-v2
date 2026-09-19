@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ODR Session Platform — Turn-Based Video Session Orchestration — RAHEEMUDHEEN M A</title>
+    <link rel="icon" href="/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet">
+    <link rel="preload" href="fonts/opensauce-medium.woff2" as="font" type="font/woff2" crossorigin="">
+
+    <link rel="stylesheet" href="/scss/index.scss">
+
+    <meta name="description" content="Designed and implemented a session orchestration layer to solve turn-based access control for online arbitration and mediation workflows within an existing ODR platform. Based on a product-level direction defined by the CTO to avoid building a custom video conferencing system, I designed a real-time orchestration solution that integrates with existing tools like Google Meet and Zoom. The system manages participant sequencing, access control, and session lifecycle through a FIFO waiting lobby, controlled meeting-link reveal, and automated notifications, enabling structured virtual proceedings without additional video infrastructure.">
+    <meta property="og:title" content="ODR Session Platform — Turn-Based Video Session Orchestration">
+    <meta property="og:description" content="Designed and implemented a session orchestration layer to solve turn-based access control for online arbitration and mediation workflows within an existing ODR platform. Based on a product-level direction defined by the CTO to avoid building a custom video conferencing system, I designed a real-time orchestration solution that integrates with existing tools like Google Meet and Zoom. The system manages participant sequencing, access control, and session lifecycle through a FIFO waiting lobby, controlled meeting-link reveal, and automated notifications, enabling structured virtual proceedings without additional video infrastructure.">
+    <meta property="og:url" content="https://raheemudheen.com/projects/odr-session-platform-video-orchestration/">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://raheemudheen.com/odr-session-management/ODR-EVENT-SESSION-MANAGEMENT-SYSTEM-FLOW-ARCHITUCTURE.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ODR Session Platform — Turn-Based Video Session Orchestration">
+    <meta name="twitter:description" content="Designed and implemented a session orchestration layer to solve turn-based access control for online arbitration and mediation workflows within an existing ODR platform. Based on a product-level direction defined by the CTO to avoid building a custom video conferencing system, I designed a real-time orchestration solution that integrates with existing tools like Google Meet and Zoom. The system manages participant sequencing, access control, and session lifecycle through a FIFO waiting lobby, controlled meeting-link reveal, and automated notifications, enabling structured virtual proceedings without additional video infrastructure.">
+    <meta name="twitter:image" content="https://raheemudheen.com/odr-session-management/ODR-EVENT-SESSION-MANAGEMENT-SYSTEM-FLOW-ARCHITUCTURE.svg">
+    <link rel="canonical" href="https://raheemudheen.com/projects/odr-session-platform-video-orchestration/">
+    <script id="project-json-ld" type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ODR Session Platform — Turn-Based Video Session Orchestration",
+  "description": "Designed and implemented a session orchestration layer to solve turn-based access control for online arbitration and mediation workflows within an existing ODR platform. Based on a product-level direction defined by the CTO to avoid building a custom video conferencing system, I designed a real-time orchestration solution that integrates with existing tools like Google Meet and Zoom. The system manages participant sequencing, access control, and session lifecycle through a FIFO waiting lobby, controlled meeting-link reveal, and automated notifications, enabling structured virtual proceedings without additional video infrastructure.",
+  "url": "https://raheemudheen.com/projects/odr-session-platform-video-orchestration/",
+  "author": {
+    "@type": "Person",
+    "name": "Raheemudheen M A"
+  },
+  "applicationCategory": "WebApplication",
+  "image": "https://raheemudheen.com/odr-session-management/ODR-EVENT-SESSION-MANAGEMENT-SYSTEM-FLOW-ARCHITUCTURE.svg"
+}</script></head>
+
+<body>
+    <main class="project-page" data-scroll-container="">
+        <nav class="home__nav">
+            <div class="nav__name" nav-anim="">
+                <span>
+                    RAHEEMUDHEEN M A </span>
+            </div>
+
+            <div class="home__nav__right">
+                <div class="console-toggle-wrapper">
+                    <label class="console-toggle-switch" title="Toggle Console Mode">
+                        <input type="checkbox" id="js-console-toggle">
+                        <span class="console-toggle-slider"></span>
+                    </label>
+                </div>
+
+                <a href="/" class="nav__button c-button">
+                    <span class="c-link">
+                        <span class="c-link__inner">
+                            <span> BACK HOME </span>
+                            <span class="c-link__animated"> BACK HOME </span>
+                        </span>
+                    </span>
+                </a>
+            </div>
+        </nav>
+
+        <section class="project-content" id="js-project-content">
+      <div class="project-header" data-scroll-section="">
+        <h1 class="project-title">ODR Session Platform — Turn-Based Video Session Orchestration</h1>
+        <p class="project-role">Product Engineer — Real-Time Orchestration &amp; Access Control</p>
+      </div>
+
+      <div class="project-body" data-scroll-section="">
+         <div class="section context">
+           <h3>Context</h3>
+           <p>Designed and implemented a session orchestration layer to solve turn-based access control for online arbitration and mediation workflows within an existing ODR platform. Based on a product-level direction defined by the CTO to avoid building a custom video conferencing system, I designed a real-time orchestration solution that integrates with existing tools like Google Meet and Zoom. The system manages participant sequencing, access control, and session lifecycle through a FIFO waiting lobby, controlled meeting-link reveal, and automated notifications, enabling structured virtual proceedings without additional video infrastructure.</p>
+         </div>
+
+         
+         <div class="section problem">
+           <h3>Problem Statement</h3>
+           <p>In the existing ODR platform, arbitrators and mediators were manually sharing public video conference links, making it difficult to enforce turn-based participation, prevent early entry, and manage large scheduled sessions. While building a custom video system could address this, it would significantly increase complexity and maintenance cost.</p>
+         </div>
+         
+
+         
+         <div class="section architecture">
+           <h3>Architecture Overview</h3>
+           <div class="architecture-diagram">
+              <img src="/odr-session-management/ODR-EVENT-SESSION-MANAGEMENT-SYSTEM-FLOW-ARCHITUCTURE.svg" alt="Architecture Diagram for ODR Session Platform — Turn-Based Video Session Orchestration" class="architecture-img" style="max-width: 100%; height: auto;" onerror="this.closest('.section.architecture').style.display='none'">
+           </div>
+         </div>
+         
+
+         
+
+         
+         <div class="section decisions">
+           <h3>System Flow / Design Decisions</h3>
+           <ul class="styled-list">
+             <li>Designed a FIFO-based waiting lobby to manage fair, turn-based participant sequencing</li><li>Implemented controlled reveal of existing video meeting links instead of building a custom video layer</li><li>Used WebSockets (Socket.IO) to synchronize lobby state, queue position, and chat in real time</li><li>Implemented OTP-based authentication with unique invite tokens for low-friction public access</li><li>Handled disconnect and rejoin scenarios while preserving queue position and session state</li><li>Automated invitations, reminders, and session lifecycle transitions using cron-based background jobs</li>
+           </ul>
+         </div>
+         
+
+         
+         <div class="section impact">
+           <h3>Impact &amp; Outcomes</h3>
+           <ul class="styled-list">
+             <li>Supported 50+ participants per session with real-time queue visibility and orderly turn management</li><li>Enabled multiple concurrent arbitration and mediation sessions</li><li>Significantly reduced manual coordination and moderation effort for arbitrators</li><li>Delivered a focused, low-maintenance orchestration layer without custom video infrastructure</li>
+           </ul>
+         </div>
+         
+
+         
+         
+         
+      </div>
+      
+      <div class="attachment-modal" id="js-attachment-modal" aria-hidden="true">
+        <div class="modal-backdrop" id="js-modal-close"></div>
+        <div class="modal-content">
+          <button class="modal-close-btn" id="js-modal-close-btn" aria-label="Close modal">×</button>
+          <figure class="modal-figure">
+             <img id="js-modal-image" src="" alt="">
+             <figcaption id="js-modal-caption"></figcaption>
+          </figure>
+        </div>
+      </div>
+    
+    </section>
+
+        <footer class="home__footer">
+            <div class="home__footer__center">
+                <div class="footer__links">
+                    <p>© 2024 RAHEEMUDHEEN M A</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    
+    <script type="module" src="/js/project.js"></script>
+
+
+</body></html>

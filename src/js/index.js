@@ -67,6 +67,21 @@ export default class Home {
 
   async initProfile() {
     try {
+      // Check if static content was injected at build time
+      const techApproachContainer = document.querySelector('.home__content');
+      const hasStaticContent = techApproachContainer && techApproachContainer.querySelector('.home__content__title');
+
+      if (hasStaticContent) {
+        // Re-initialize contact buttons inside static content
+        const newContactButtons = document.querySelectorAll(".contact-scroll");
+        mapEach(newContactButtons, (button) => {
+          button.onclick = () => {
+            this.locomotive.scrollTo(footer);
+          };
+        });
+        return;
+      }
+
       const response = await fetch('/profile-data.json');
       const data = await response.json();
 
@@ -77,7 +92,6 @@ export default class Home {
       }
 
       // 2. Technical Approach
-      const techApproachContainer = document.querySelector('.home__content');
       if (techApproachContainer && data.technical_approach) {
         techApproachContainer.innerHTML = `
           <h2 class="home__content__title">${data.technical_approach.title}</h2>
@@ -119,7 +133,6 @@ export default class Home {
       }
 
       // Re-initialize contact buttons inside dynamic content
-      // Since 'About' and 'Prof Focus' might have contact buttons
       const newContactButtons = document.querySelectorAll(".contact-scroll");
       mapEach(newContactButtons, (button) => {
         button.onclick = () => {

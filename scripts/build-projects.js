@@ -89,7 +89,7 @@ const buildProjectSection = (templateCheerio, set, setIndex) => {
       : "";
 
     const deepDiveLink = `
-    <a href="/project.html?id=${project.id}" class="c-button deep-dive-trigger">
+    <a href="/projects/${project.id}/" class="c-button deep-dive-trigger">
       <span class="c-link">
         <span class="c-link__inner">
           <span>

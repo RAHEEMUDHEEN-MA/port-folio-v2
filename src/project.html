@@ -56,6 +56,13 @@
         </footer>
     </main>
 
+    <script id="redirect-script">
+        const params = new URLSearchParams(window.location.search);
+        const projectId = params.get("id");
+        if (projectId) {
+            window.location.replace(`/projects/${projectId}/`);
+        }
+    </script>
     <script type="module" src="./js/project.js"></script>
 </body>
 

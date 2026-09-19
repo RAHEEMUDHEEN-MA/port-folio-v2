@@ -43,11 +43,39 @@ class ProjectPage {
 
   async loadProject() {
     const params = new URLSearchParams(window.location.search);
-    const projectId = params.get("id");
+    let projectId = params.get("id");
+    const pathMatch = window.location.pathname.match(/\/projects\/([^/]+)/);
+    if (pathMatch) {
+      projectId = pathMatch[1];
+    }
+
     const container = document.getElementById("js-project-content");
 
     if (!projectId) {
       window.location.href = "/";
+      return;
+    }
+
+    const hasStaticContent = container.querySelector('.project-header');
+
+    if (hasStaticContent) {
+      this.initModalListeners();
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+        gsap.utils.toArray([".project-title", ".project-role", ".section"]).forEach((el) => {
+          gsap.from(el, {
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+            duration: 1.5,
+            y: 50,
+            opacity: 0,
+            ease: "power4.out",
+          });
+        });
+      }, 100);
       return;
     }
 
@@ -114,7 +142,9 @@ class ProjectPage {
       if (isChecked) {
         // Sync CWD with current project if needed
         const urlParams = new URLSearchParams(window.location.search);
-        const projectId = urlParams.get('id');
+        let projectId = urlParams.get('id');
+        const pathMatch = window.location.pathname.match(/\/projects\/([^/]+)/);
+        if (pathMatch) projectId = pathMatch[1];
 
         if (projectId && consoleInstance.vfs) {
           const projectPath = consoleInstance.vfs.getProjectPathById(projectId);
