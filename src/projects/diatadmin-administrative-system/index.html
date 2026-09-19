@@ -10,6 +10,15 @@
     <link rel="preload" href="fonts/opensauce-medium.woff2" as="font" type="font/woff2" crossorigin="">
 
     <link rel="stylesheet" href="/scss/index.scss">
+    <script>
+        (function() {
+            try {
+                var t = localStorage.getItem("theme");
+                var d = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                if (t === "dark" || (!t && d)) document.documentElement.setAttribute("data-theme", "dark");
+            } catch (e) {}
+        })();
+    </script>
 
     <meta name="description" content="Delivered a custom administrative system for DIAT, a multi-branch technical institute, by working directly with non-technical stakeholders to translate academic, financial, and operational workflows into a maintainable full-stack solution. Owned backend APIs, data modeling, authentication, and VPS deployment alongside the frontend, focusing on clarity, reliability, and cost-aware engineering rather than infrastructure scale while delivering the system from requirements through production. Implemented a QR-based student identity feature that allows secure public access to student profiles, academic records, and fee payment statements via scanned IDs.">
     <meta property="og:title" content="DIATADMIN — CLIENT-FACING ADMINISTRATIVE SYSTEM">

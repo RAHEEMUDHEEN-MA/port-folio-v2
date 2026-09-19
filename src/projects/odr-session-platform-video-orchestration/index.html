@@ -10,6 +10,15 @@
     <link rel="preload" href="fonts/opensauce-medium.woff2" as="font" type="font/woff2" crossorigin="">
 
     <link rel="stylesheet" href="/scss/index.scss">
+    <script>
+        (function() {
+            try {
+                var t = localStorage.getItem("theme");
+                var d = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                if (t === "dark" || (!t && d)) document.documentElement.setAttribute("data-theme", "dark");
+            } catch (e) {}
+        })();
+    </script>
 
     <meta name="description" content="Designed and implemented a session orchestration layer to solve turn-based access control for online arbitration and mediation workflows within an existing ODR platform. Based on a product-level direction defined by the CTO to avoid building a custom video conferencing system, I designed a real-time orchestration solution that integrates with existing tools like Google Meet and Zoom. The system manages participant sequencing, access control, and session lifecycle through a FIFO waiting lobby, controlled meeting-link reveal, and automated notifications, enabling structured virtual proceedings without additional video infrastructure.">
     <meta property="og:title" content="ODR Session Platform — Turn-Based Video Session Orchestration">

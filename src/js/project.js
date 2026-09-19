@@ -455,18 +455,69 @@ class ProjectPage {
 
     const modalImg = document.getElementById("js-modal-image");
     const modalCaption = document.getElementById("js-modal-caption");
-    const triggers = document.querySelectorAll(".attachment-item.image-item");
+    const triggers = document.querySelectorAll(".attachment-item.image-item, .architecture-img");
     const closeBtns = [
       document.getElementById("js-modal-close"),
       document.getElementById("js-modal-close-btn")
     ];
 
+    let currentImageIndex = -1;
+    const imagesData = Array.from(triggers).map((trigger, idx) => {
+      trigger.dataset.idx = idx;
+      const img = trigger.tagName.toLowerCase() === 'img' ? trigger : trigger.querySelector("img");
+      let caption = "";
+      if (trigger.classList.contains("architecture-img")) {
+         caption = "Architecture Diagram";
+      } else {
+         caption = (trigger.getAttribute("aria-label") || "").replace("View screenshot: ", "");
+      }
+      return {
+        src: img.src,
+        alt: img.alt,
+        caption: caption
+      };
+    });
+
+    let currentScale = 1;
+    let panX = 0;
+    let panY = 0;
+
+    const updateModalContent = (direction = 0) => {
+      const data = imagesData[currentImageIndex];
+      currentScale = 1;
+      panX = 0;
+      panY = 0;
+
+      if (direction !== 0) {
+        gsap.to(modalImg, {
+          x: direction * -100, // Move further for snappier out
+          opacity: 0,
+          scale: 1,
+          duration: 0.15, // Faster!
+          ease: "power2.inOut",
+          onComplete: () => {
+            modalImg.src = data.src;
+            modalImg.alt = data.alt;
+            modalCaption.textContent = data.caption;
+            gsap.fromTo(modalImg, 
+              { x: direction * 100, opacity: 0, scale: 1 }, 
+              { x: 0, opacity: 1, scale: 1, duration: 0.25, ease: "power2.out" }
+            );
+          }
+        });
+      } else {
+        modalImg.src = data.src;
+        modalImg.alt = data.alt;
+        modalCaption.textContent = data.caption;
+        gsap.set(modalImg, { x: 0, y: 0, scale: 1, opacity: 1 });
+      }
+    };
+
     triggers.forEach(trigger => {
       trigger.addEventListener("click", () => {
-        const img = trigger.querySelector("img");
-        modalImg.src = img.src;
-        modalImg.alt = img.alt;
-        modalCaption.textContent = trigger.getAttribute("aria-label").replace("View screenshot: ", "");
+        currentImageIndex = parseInt(trigger.dataset.idx, 10);
+        updateModalContent(0);
+        
         modal.classList.add("is-active");
         modal.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden"; // Prevent background scroll
@@ -481,14 +532,149 @@ class ProjectPage {
       this.scroll.start(); // Resume locomotive scroll
       setTimeout(() => {
         modalImg.src = ""; // Clear for next time
+        currentScale = 1;
+        panX = 0;
+        panY = 0;
+        gsap.set(modalImg, { x: 0, y: 0, scale: 1, opacity: 1 });
       }, 300);
     };
 
     closeBtns.forEach(btn => btn?.addEventListener("click", closeModal));
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && modal.classList.contains("is-active")) {
+      if (!modal.classList.contains("is-active")) return;
+      
+      if (e.key === "Escape") {
         closeModal();
+      } else if (e.key === "ArrowLeft" && currentImageIndex > 0) {
+        currentImageIndex--;
+        updateModalContent(-1);
+      } else if (e.key === "ArrowRight" && currentImageIndex < imagesData.length - 1) {
+        currentImageIndex++;
+        updateModalContent(1);
+      }
+    });
+
+    // Touch Swipe Support & Pinch Zoom
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchCurrentX = 0;
+    let touchCurrentY = 0;
+    let isSwiping = false;
+
+    let initialPinchDistance = null;
+    let initialScale = 1;
+
+    modal.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 2) {
+        isSwiping = false;
+        initialPinchDistance = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        initialScale = currentScale;
+        return;
+      }
+
+      if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX - panX; // Account for current pan
+        touchStartY = e.touches[0].clientY - panY;
+        touchCurrentX = e.touches[0].clientX;
+        touchCurrentY = e.touches[0].clientY;
+        
+        // Only allow swiping if we're not zoomed in
+        if (currentScale === 1) {
+          isSwiping = true;
+        } else {
+          isSwiping = false;
+        }
+      }
+    }, { passive: false });
+
+    modal.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 2 && initialPinchDistance) {
+        e.preventDefault(); // Prevent default zoom behavior
+        const currentDistance = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        currentScale = Math.max(1, Math.min(initialScale * (currentDistance / initialPinchDistance), 4));
+        gsap.set(modalImg, { scale: currentScale, x: panX, y: panY });
+        return;
+      }
+
+      if (e.touches.length === 1 && currentScale > 1) {
+        // Panning when zoomed in
+        e.preventDefault();
+        panX = e.touches[0].clientX - touchStartX;
+        panY = e.touches[0].clientY - touchStartY;
+        gsap.set(modalImg, { x: panX, y: panY });
+        return;
+      }
+
+      if (!isSwiping) return;
+      touchCurrentX = e.touches[0].clientX;
+      touchCurrentY = e.touches[0].clientY;
+      
+      const deltaX = touchCurrentX - touchStartX; // When scale=1, panX=0, so touchStartX is exact clientX start
+      const deltaY = touchCurrentY - touchStartY;
+
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal swipe preview: 1:1 tracking, edge resistance 0.3
+        const resistance = (deltaX > 0 && currentImageIndex === 0) || (deltaX < 0 && currentImageIndex === imagesData.length - 1) ? 0.3 : 1;
+        gsap.set(modalImg, { x: deltaX * resistance });
+      } else if (deltaY > 0) {
+        // Vertical swipe down preview: 1:1 tracking
+        gsap.set(modalImg, { y: deltaY, opacity: 1 - (deltaY / window.innerHeight) });
+      }
+    }, { passive: false });
+
+    modal.addEventListener('touchend', (e) => {
+      if (initialPinchDistance) {
+        if (e.touches.length < 2) {
+          initialPinchDistance = null;
+        }
+        if (currentScale < 1.05) {
+          currentScale = 1;
+          panX = 0;
+          panY = 0;
+          gsap.to(modalImg, { scale: 1, x: 0, y: 0, duration: 0.3, ease: "power2.out" });
+        }
+        return;
+      }
+
+      if (currentScale > 1) {
+        // We were panning, don't trigger swipe
+        return;
+      }
+
+      if (!isSwiping) return;
+      isSwiping = false;
+      
+      const deltaX = touchCurrentX - touchStartX;
+      const deltaY = touchCurrentY - touchStartY;
+      const swipeThreshold = 50;
+
+      // Handle horizontal swipe
+      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
+        if (deltaX > 0 && currentImageIndex > 0) {
+          currentImageIndex--;
+          updateModalContent(-1);
+        } else if (deltaX < 0 && currentImageIndex < imagesData.length - 1) {
+          currentImageIndex++;
+          updateModalContent(1);
+        } else {
+          // Snap back if at edges
+          gsap.to(modalImg, { x: 0, duration: 0.2, ease: "power2.out" });
+        }
+      } 
+      // Handle vertical swipe down to close
+      else if (deltaY > swipeThreshold && Math.abs(deltaY) > Math.abs(deltaX)) {
+        gsap.to(modalImg, { y: window.innerHeight, opacity: 0, duration: 0.2, ease: "power2.in", onComplete: closeModal });
+      } 
+      // Snap back if threshold not met
+      else {
+        gsap.to(modalImg, { x: 0, y: 0, opacity: 1, duration: 0.2, ease: "power2.out" });
       }
     });
   }

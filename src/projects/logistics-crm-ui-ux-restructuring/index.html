@@ -10,6 +10,15 @@
     <link rel="preload" href="fonts/opensauce-medium.woff2" as="font" type="font/woff2" crossorigin="">
 
     <link rel="stylesheet" href="/scss/index.scss">
+    <script>
+        (function() {
+            try {
+                var t = localStorage.getItem("theme");
+                var d = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                if (t === "dark" || (!t && d)) document.documentElement.setAttribute("data-theme", "dark");
+            } catch (e) {}
+        })();
+    </script>
 
     <meta name="description" content="Co-led a UI/UX restructuring of a large logistics CRM platform in close collaboration with the UX design team. Took ownership of frontend implementation and information-architecture decisions, transforming the system from a menu-heavy, module-scattered interface into a clean, module-based, role-driven dashboard experience. Designed and implemented role-based dashboards with clear information hierarchy to improve operational monitoring, financial visibility, and decision-making for operations, finance, and management users. Introduced consistent theming and first-class geo-data visualization to better align the interface with real-world logistics workflows.">
     <meta property="og:title" content="LOGISTICS CRM UI/UX RESTRUCTURING — ROLE-BASED DASHBOARDS">

@@ -10,6 +10,15 @@
     <link rel="preload" href="fonts/opensauce-medium.woff2" as="font" type="font/woff2" crossorigin="">
 
     <link rel="stylesheet" href="/scss/index.scss">
+    <script>
+        (function() {
+            try {
+                var t = localStorage.getItem("theme");
+                var d = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                if (t === "dark" || (!t && d)) document.documentElement.setAttribute("data-theme", "dark");
+            } catch (e) {}
+        })();
+    </script>
 
     <meta name="description" content="Currently developing an AI-powered generative UI capability as an extension of a config-driven application platform. The system enables users to interact with enterprise applications through natural language, interpreting user intent and dynamically composing interfaces such as tables, detail views, selection flows, and pre-filled forms. Rather than allowing the LLM to generate arbitrary frontend code, the system translates AI reasoning into structured UI configuration that is rendered through a controlled component system. The platform is designed to connect with domain-specific backend APIs and tools while keeping data access and application operations within existing authorization boundaries. The implementation is being developed iteratively as part of ongoing product engineering work.">
     <meta property="og:title" content="GENUI — AI-POWERED GENERATIVE UI">
